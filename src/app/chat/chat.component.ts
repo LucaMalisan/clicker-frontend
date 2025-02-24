@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {CoreService} from "../core.service";
+import {FormsModule} from "@angular/forms";
 
 interface ChatMessage {
     username: string;
@@ -8,7 +9,6 @@ interface ChatMessage {
 
 @Component({
     selector: 'app-chat',
-    standalone: true,
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.css'],
 })

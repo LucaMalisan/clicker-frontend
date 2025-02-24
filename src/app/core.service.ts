@@ -20,6 +20,7 @@ export class CoreService {
     } );
 
     this.socket.on( 'connect', () => {
+      console.log("connection attempt started")
       this.sendData('register', '');
     } );
   }
@@ -35,7 +36,7 @@ export class CoreService {
   }
 
   sendData(event, data) {
-    this.socket.emit(event, cmd);
+    this.socket.emit(event, data);
   }
 
   login( loginInfo ) {
