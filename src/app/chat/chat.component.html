@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    <input (keydown.enter)="sendMessage()" placeholder="Type a message..." />
+    <input type="text" (keydown.enter)="sendMessage()" [formControl]="messageInput" placeholder="Type a message..." />
     <button (click)="sendMessage()">Send</button>
 </div>
   

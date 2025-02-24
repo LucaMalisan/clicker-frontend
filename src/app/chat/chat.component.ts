@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {CoreService} from "../core.service";
-import {FormsModule} from "@angular/forms";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
 
 interface ChatMessage {
     username: string;
@@ -10,27 +11,43 @@ interface ChatMessage {
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
-    styleUrls: ['./chat.component.css'],
+    styleUrls: ['./chat.component.scss']
 })
 
 export class ChatComponent {
 
     messages: ChatMessage[] = [];
-    messageInput: string = '';
     isRegistered: boolean = false;
 
-    protected coreService: CoreService;
+    public messageInput: FormControl;
 
-    constructor() {
+    constructor(
+            private coreService: CoreService,
+            private router: Router) {
+
+        this.messageInput = new FormControl('');
+        this.coreService = new CoreService();
+
+        this.coreService.listen("chat-message", (data) => {
+            let json = JSON.parse(data);
+
+            let message: ChatMessage = {
+                username: json.username,
+                message: json.message
+            }
+
+            this.messages.push(message);
+        })
     }
 
     sendMessage() {
-        /*   if (this.messageInput.trim() && this.isRegistered) {
-               const chatMessage = {
-                   event: 'chat-message',
-                   username: 'Player1',
-                   message: this.messageInput
-               };
-           } */
+        debugger
+
+        let message: ChatMessage = {
+            username: 'Player 1',
+            message: this.messageInput.value
+        }
+
+        this.coreService.sendData("chat-message", JSON.stringify(message));
     }
 }

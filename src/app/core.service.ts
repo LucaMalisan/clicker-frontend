@@ -39,6 +39,10 @@ export class CoreService {
     this.socket.emit(event, data);
   }
 
+  listen(event, handler) {
+    this.socket.on(event, handler);
+  }
+
   login( loginInfo ) {
     this.loggedIn = false;
     const observable = new Observable( loginObserver => {
