@@ -1,45 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CoreService } from '../core.service';
-import { take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {CoreService} from '../core.service';
+import {take} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    standalone: true,
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  public responseMessage: string;
+    public responseMessage: string;
 
-  constructor(
-    private coreService: CoreService,
-    private router: Router ) {
-  }
+    constructor(
+            private coreService: CoreService,
+            private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  onSignIn( evt, userName, password ) {
+    onSignIn(evt, userName, password) {
 
-    evt.preventDefault();
-    this.responseMessage = "";
+        evt.preventDefault();
+        this.responseMessage = "";
 
-    const loginInfo = {
-      userName: userName,
-      password: password
-    };
+        const loginInfo = {
+            userName: userName,
+            password: password
+        };
 
-    const ob = this.coreService.login( loginInfo );
-    ob.pipe(take(1)).subscribe( {
-      complete: () => {
-        this.router.navigate( ['dashboard'] );
-      },
-      error: err => {
-        this.responseMessage = err;
-      }
-    } );
-
-  }
+        const ob = this.coreService.login(loginInfo);
+        ob.pipe(take(1)).subscribe({
+            complete: () => {
+                this.router.navigate(['dashboard']);
+            },
+            error: err => {
+                this.responseMessage = err;
+            }
+        });
+    }
 }

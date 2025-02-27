@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {CoreService} from "../core.service";
-import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
+import {NgForOf} from "@angular/common";
 
 interface ChatMessage {
     username: string;
@@ -11,6 +12,11 @@ interface ChatMessage {
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        NgForOf
+    ],
     styleUrls: ['./chat.component.scss']
 })
 
