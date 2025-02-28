@@ -1,44 +1,55 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CoreService} from '../core.service';
-import {take} from 'rxjs/operators';
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+
+interface LoginInfo {
+    userName: string;
+    password: string;
+}
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     standalone: true,
+    imports: [
+        ReactiveFormsModule
+    ],
     styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
-    public responseMessage: string;
+    private redirectTo: string;
+
+    public userName: FormControl;
+    public password: FormControl;
 
     constructor(
             private coreService: CoreService,
             private router: Router) {
+        this.userName = new FormControl('');
+        this.password = new FormControl('');
     }
 
     ngOnInit() {
+        this.coreService.listen('authenticated', () => {
+            console.log("Authentication successful");
+            this.coreService.loggedIn = true;
+            this.router.navigate([this.redirectTo]).then(err => console.error(err));
+        });
     }
 
-    onSignIn(evt, userName, password) {
-
+    onSignIn(evt: Event) {
         evt.preventDefault();
-        this.responseMessage = "";
+        evt.stopPropagation();
 
-        const loginInfo = {
-            userName: userName,
-            password: password
-        };
+        const loginInfo: LoginInfo = {
+            userName: this.userName.value,
+            password: this.password.value
+        }
 
-        const ob = this.coreService.login(loginInfo);
-        ob.pipe(take(1)).subscribe({
-            complete: () => {
-                this.router.navigate(['dashboard']);
-            },
-            error: err => {
-                this.responseMessage = err;
-            }
-        });
+        this.coreService.loggedIn = false;
+        this.coreService.sendData("authentication", JSON.stringify(loginInfo));
     }
 }

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -20,20 +20,18 @@ interface ChatMessage {
     styleUrls: ['./chat.component.scss']
 })
 
-export class ChatComponent {
+export class ChatComponent implements OnInit {
 
-    messages: ChatMessage[] = [];
-    isRegistered: boolean = false;
-
+    public messages: ChatMessage[] = [];
     public messageInput: FormControl;
 
     constructor(
             private coreService: CoreService,
             private router: Router) {
-
         this.messageInput = new FormControl('');
-        this.coreService = new CoreService();
+    }
 
+    ngOnInit() {
         this.coreService.listen("chat-message", (data) => {
             let json = JSON.parse(data);
 
@@ -43,12 +41,10 @@ export class ChatComponent {
             }
 
             this.messages.push(message);
-        })
+        });
     }
 
     sendMessage() {
-        debugger
-
         let message: ChatMessage = {
             username: 'Player 1',
             message: this.messageInput.value
