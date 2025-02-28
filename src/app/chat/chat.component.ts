@@ -42,6 +42,12 @@ export class ChatComponent implements OnInit {
 
             this.messages.push(message);
         });
+
+        if (!this.coreService.loggedIn) {
+            this.coreService.redirectTo = 'chat';
+            this.router.navigate(['login'])
+            .catch(err => console.error(err));
+        }
     }
 
     sendMessage() {

@@ -10,7 +10,8 @@ export class CoreService {
     //TODO env variable
     public url = 'http://localhost:3000';
     public socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-    public loggedIn
+    public loggedIn: boolean;
+    public redirectTo: string;
 
     constructor() {
         this.socket = io(this.url, {
