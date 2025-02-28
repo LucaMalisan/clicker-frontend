@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CoreService} from '../core.service';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
@@ -13,7 +13,8 @@ interface LoginInfo {
     templateUrl: './login.component.html',
     standalone: true,
     imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterLink
     ],
     styleUrls: ['./login.component.css']
 })
@@ -22,6 +23,11 @@ export class LoginComponent implements OnInit {
 
     public userName: FormControl;
     public password: FormControl;
+    public responseMessage: string;
+
+    //TODO: use local storage and server-side validation
+    public static loggedIn: boolean;
+    public static redirectTo: string;
 
     constructor(
             private coreService: CoreService,
@@ -31,10 +37,11 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.responseMessage = "";
         this.coreService.listen('login-successful', () => {
             console.log("Login successful");
-            this.coreService.loggedIn = true;
-            this.router.navigate([this.coreService.redirectTo])
+            LoginComponent.loggedIn = true;
+            this.router.navigate([LoginComponent.redirectTo ? LoginComponent.redirectTo : 'chat'])
             .then(response => console.log(response));
         });
     }
@@ -48,7 +55,9 @@ export class LoginComponent implements OnInit {
             password: this.password.value
         }
 
-        this.coreService.loggedIn = false;
-        this.coreService.sendData("login-user", JSON.stringify(loginInfo));
+        LoginComponent.loggedIn = false;
+        this.coreService.sendData("login-user",
+                JSON.stringify(loginInfo),
+                (response: string) => this.responseMessage = response);
     }
 }

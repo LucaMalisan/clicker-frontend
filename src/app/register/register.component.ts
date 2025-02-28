@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CoreService} from '../core.service';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {LoginComponent} from "../login/login.component";
 
 interface RegistrationInfo {
     userName: string;
@@ -13,7 +14,8 @@ interface RegistrationInfo {
     templateUrl: './register.component.html',
     standalone: true,
     imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterLink
     ],
     styleUrls: ['./register.component.css']
 })
@@ -22,6 +24,7 @@ export class RegisterComponent implements OnInit {
 
     public userName: FormControl;
     public password: FormControl;
+    public responseMessage: string;
 
     constructor(
             private coreService: CoreService,
@@ -47,7 +50,9 @@ export class RegisterComponent implements OnInit {
             password: this.password.value
         }
 
-        this.coreService.loggedIn = false;
-        this.coreService.sendData("register-user", JSON.stringify(registrationInfo));
+        LoginComponent.loggedIn = false;
+        this.coreService.sendData("register-user",
+                JSON.stringify(registrationInfo),
+                (response: string) => this.responseMessage = response);
     }
 }

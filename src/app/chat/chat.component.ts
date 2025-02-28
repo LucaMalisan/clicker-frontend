@@ -3,6 +3,7 @@ import {CoreService} from "../core.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 import {NgForOf} from "@angular/common";
+import {LoginComponent} from "../login/login.component";
 
 interface ChatMessage {
     username: string;
@@ -32,6 +33,12 @@ export class ChatComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (!LoginComponent.loggedIn) {
+            LoginComponent.redirectTo = 'chat';
+            this.router.navigate(['login'])
+            .catch(err => console.error(err));
+        }
+
         this.coreService.listen("chat-message", (data) => {
             let json = JSON.parse(data);
 
@@ -42,12 +49,6 @@ export class ChatComponent implements OnInit {
 
             this.messages.push(message);
         });
-
-        if (!this.coreService.loggedIn) {
-            this.coreService.redirectTo = 'chat';
-            this.router.navigate(['login'])
-            .catch(err => console.error(err));
-        }
     }
 
     sendMessage() {
