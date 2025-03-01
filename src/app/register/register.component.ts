@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
         this.coreService.listen('registration-successful', () => {
             console.log("Registration successful");
             this.router.navigate(['login'])
-            .then(response => console.log("Got response: " + response));
+            .then(response => console.log(`Redirect to login : ${response}`));
         });
     }
 

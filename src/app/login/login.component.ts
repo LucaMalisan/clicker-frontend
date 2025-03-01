@@ -24,9 +24,8 @@ export class LoginComponent implements OnInit {
 
     public userName: FormControl;
     public password: FormControl;
-    public responseMessage: string;
-
-    public static loggedIn = new ReplaySubject<boolean>();
+    public errorMessage: string;
+    public successMessage: string;
 
     constructor(
             private coreService: CoreService,
@@ -36,13 +35,11 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.responseMessage = "";
+        this.errorMessage = "";
+        this.successMessage = "";
         this.coreService.listen('login-successful', (jwt: string) => {
-            console.log("Login successful");
             localStorage.setItem('jwt', jwt);
-
-            this.router.navigate([localStorage.getItem("redirect-to") ? localStorage.getItem("redirect-to") : 'chat'])
-            .then(response => console.log("Got response: " + response));
+            this.router.navigate(['chat']);
         });
     }
 
@@ -57,6 +54,6 @@ export class LoginComponent implements OnInit {
 
         this.coreService.sendData("login-user",
                 JSON.stringify(loginInfo),
-                (response: string) => this.responseMessage = response);
+                (response: string) => this.errorMessage = response);
     }
 }

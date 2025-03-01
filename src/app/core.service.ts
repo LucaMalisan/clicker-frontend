@@ -2,6 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {DefaultEventsMap} from '@socket.io/component-emitter';
 import {io, Socket} from "socket.io-client";
 import {LoginComponent} from "./login/login.component";
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class CoreService {
     public url = 'http://localhost:3000';
     public socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
-    constructor() {
+    constructor(private router: Router) {
         this.socket = io(this.url, {
             reconnection: false
         });
@@ -24,7 +25,12 @@ export class CoreService {
             this.sendData('register', jwt, (authenticated: string) => {
                 console.log("JWT token is valid: " + authenticated)
                 console.log("authenticated === true: " + (authenticated === 'true'));
-                LoginComponent.loggedIn.next(authenticated === 'true');
+
+                if (authenticated !== 'true') {
+                    this.router.navigate(['login'])
+                }
+
+                // LoginComponent.loggedIn.next(authenticated === 'true');
             });
         });
     }
