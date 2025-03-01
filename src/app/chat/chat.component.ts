@@ -33,21 +33,26 @@ export class ChatComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (!LoginComponent.loggedIn) {
-            LoginComponent.redirectTo = 'chat';
-            this.router.navigate(['login'])
-            .catch(err => console.error(err));
-        }
+        // core service updates loggedIn on each request through validating jwt
+        // we have to wait util loggedIn is set
 
-        this.coreService.listen("chat-message", (data) => {
-            let json = JSON.parse(data);
-
-            let message: ChatMessage = {
-                username: json.username,
-                message: json.message
+        LoginComponent.loggedIn.subscribe((data) => {
+            if (!data) {
+                localStorage.setItem("redirect-to", "chat");
+                this.router.navigate(['login'])
+                .catch(err => console.error(err));
             }
 
-            this.messages.push(message);
+            this.coreService.listen("chat-message", (data) => {
+                let json = JSON.parse(data);
+
+                let message: ChatMessage = {
+                    username: json.username,
+                    message: json.message
+                }
+
+                this.messages.push(message);
+            });
         });
     }
 

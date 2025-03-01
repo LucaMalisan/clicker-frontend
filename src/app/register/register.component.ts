@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
         this.coreService.listen('registration-successful', () => {
             console.log("Registration successful");
             this.router.navigate(['login'])
-            .then(response => console.log(response));
+            .then(response => console.log("Got response: " + response));
         });
     }
 
@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
             password: this.password.value
         }
 
-        LoginComponent.loggedIn = false;
         this.coreService.sendData("register-user",
                 JSON.stringify(registrationInfo),
                 (response: string) => this.responseMessage = response);

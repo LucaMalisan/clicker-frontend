@@ -1,6 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {DefaultEventsMap} from '@socket.io/component-emitter';
 import {io, Socket} from "socket.io-client";
+import {LoginComponent} from "./login/login.component";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,13 @@ export class CoreService {
 
         this.socket.on('connect', () => {
             console.log("connection attempt started")
-            this.sendData('register', '');
+            let jwt = localStorage.getItem('jwt');
+
+            this.sendData('register', jwt, (authenticated: string) => {
+                console.log("JWT token is valid: " + authenticated)
+                console.log("authenticated === true: " + (authenticated === 'true'));
+                LoginComponent.loggedIn.next(authenticated === 'true');
+            });
         });
     }
 

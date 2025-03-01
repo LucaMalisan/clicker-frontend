@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {CoreService} from '../core.service';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {ReplaySubject} from "rxjs";
 
 interface LoginInfo {
     userName: string;
@@ -25,9 +26,7 @@ export class LoginComponent implements OnInit {
     public password: FormControl;
     public responseMessage: string;
 
-    //TODO: use local storage and server-side validation
-    public static loggedIn: boolean;
-    public static redirectTo: string;
+    public static loggedIn = new ReplaySubject<boolean>();
 
     constructor(
             private coreService: CoreService,
@@ -38,11 +37,12 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.responseMessage = "";
-        this.coreService.listen('login-successful', () => {
+        this.coreService.listen('login-successful', (jwt: string) => {
             console.log("Login successful");
-            LoginComponent.loggedIn = true;
-            this.router.navigate([LoginComponent.redirectTo ? LoginComponent.redirectTo : 'chat'])
-            .then(response => console.log(response));
+            localStorage.setItem('jwt', jwt);
+
+            this.router.navigate([localStorage.getItem("redirect-to") ? localStorage.getItem("redirect-to") : 'chat'])
+            .then(response => console.log("Got response: " + response));
         });
     }
 
@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
             password: this.password.value
         }
 
-        LoginComponent.loggedIn = false;
         this.coreService.sendData("login-user",
                 JSON.stringify(loginInfo),
                 (response: string) => this.responseMessage = response);
