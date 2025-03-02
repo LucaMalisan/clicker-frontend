@@ -51,8 +51,4 @@ div.container {
   p.error {
     color: red;
   }
-
-  p.error {
-    color: green;
-  }
 }

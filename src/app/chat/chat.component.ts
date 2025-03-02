@@ -25,14 +25,14 @@ export class ChatComponent implements OnInit {
     public messages: ChatMessage[] = [];
     public messageInput: FormControl;
 
-    constructor(
-            private coreService: CoreService,
-            private router: Router) {
+    constructor(private coreService: CoreService) {
         this.messageInput = new FormControl('');
     }
 
     ngOnInit() {
-        this.coreService.listen("chat-message", (data) => {
+        this.coreService.listen("chat-message", (data: string) => {
+            console.log(data);
+
             let json = JSON.parse(data);
 
             let message: ChatMessage = {
@@ -50,6 +50,7 @@ export class ChatComponent implements OnInit {
             message: this.messageInput.value
         }
 
+        console.log(JSON.stringify(message));
         this.coreService.sendData("chat-message", JSON.stringify(message));
     }
 }

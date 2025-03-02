@@ -24,18 +24,17 @@ export class CoreService {
 
             this.sendData('register', jwt, (authenticated: string) => {
                 console.log("JWT token is valid: " + authenticated)
-                console.log("authenticated === true: " + (authenticated === 'true'));
 
                 if (authenticated !== 'true') {
                     this.router.navigate(['login'])
                 }
-
-                // LoginComponent.loggedIn.next(authenticated === 'true');
             });
         });
     }
 
     sendData(event: string, data: string, handler = undefined) {
+        handler = handler ? handler : () => {
+        };
         this.socket.emit(event, data, handler);
     }
 

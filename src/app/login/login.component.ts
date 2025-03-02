@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     public userName: FormControl;
     public password: FormControl;
     public errorMessage: string;
-    public successMessage: string;
 
     constructor(
             private coreService: CoreService,
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.errorMessage = "";
-        this.successMessage = "";
+
         this.coreService.listen('login-successful', (jwt: string) => {
             localStorage.setItem('jwt', jwt);
             this.router.navigate(['chat']);
