@@ -1,8 +1,17 @@
 import {Injectable, OnInit} from '@angular/core';
 import {DefaultEventsMap} from '@socket.io/component-emitter';
 import {io, Socket} from "socket.io-client";
-import {LoginComponent} from "./login/login.component";
 import {Router} from "@angular/router";
+
+interface Tokens {
+    jwt: string,
+    refreshToken: string
+}
+
+interface Response {
+    success: boolean,
+    jwt: string
+}
 
 @Injectable({
     providedIn: 'root'
@@ -21,13 +30,22 @@ export class CoreService {
         this.socket.on('connect', () => {
             console.log("connection attempt started")
             let jwt = localStorage.getItem('jwt');
+            let refreshToken = localStorage.getItem('refresh-token');
+            let tokens: Tokens = {
+                jwt: jwt,
+                refreshToken: refreshToken
+            }
 
-            this.sendData('register', jwt, (authenticated: string) => {
-                console.log("JWT token is valid: " + authenticated)
+            this.sendData('register', JSON.stringify(tokens), (response: string) => {
+                let json: Response = JSON.parse(response);
 
-                if (authenticated !== 'true') {
+                console.log("JWT token is valid: " + json.success)
+
+                if (!json.success) {
                     this.router.navigate(['login'])
                 }
+
+                localStorage.setItem('jwt', json.jwt);
             });
         });
     }

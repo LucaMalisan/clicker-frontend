@@ -2,11 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {CoreService} from '../core.service';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {ReplaySubject} from "rxjs";
 
 interface LoginInfo {
     userName: string;
     password: string;
+}
+
+interface Tokens {
+    jwt: string,
+    refreshToken: string
 }
 
 @Component({
@@ -36,8 +40,11 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.errorMessage = "";
 
-        this.coreService.listen('login-successful', (jwt: string) => {
-            localStorage.setItem('jwt', jwt);
+        this.coreService.listen('login-successful', (tokens: string) => {
+            let json: Tokens = JSON.parse(tokens);
+            localStorage.setItem('jwt', json.jwt);
+            localStorage.setItem('refresh-token', json.refreshToken);
+
             this.router.navigate(['chat']);
         });
     }
