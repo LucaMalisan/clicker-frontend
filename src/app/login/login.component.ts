@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.errorMessage = "";
 
+        //TODO use HTTP-Only Cookies
         this.coreService.listen('login-successful', (tokens: string) => {
             let json: Tokens = JSON.parse(tokens);
             localStorage.setItem('jwt', json.jwt);

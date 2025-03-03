@@ -1,0 +1,27 @@
+h2 {
+  justify-self: center;
+  margin-bottom: 40px;
+}
+
+div.tile {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 30px;
+  gap: 10px;
+  background-color: lightgray;
+  border-radius: 30px;
+  justify-content: space-between;
+
+  div.tile-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+div.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
