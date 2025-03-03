@@ -1,0 +1,32 @@
+h2, h3 {
+  justify-self: center;
+  margin-bottom: 40px;
+}
+
+div.tile {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 30px;
+  gap: 10px;
+  background-color: lightgray;
+  border-radius: 30px;
+  justify-content: space-between;
+
+  div.tile-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+div.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
