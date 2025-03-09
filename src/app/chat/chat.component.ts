@@ -4,7 +4,7 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 import {NgForOf} from "@angular/common";
 
-interface ChatMessage {
+interface IChatMessageResponse {
     username: string;
     message: string;
 }
@@ -22,7 +22,7 @@ interface ChatMessage {
 
 export class ChatComponent implements OnInit {
 
-    public messages: ChatMessage[] = [];
+    public messages: IChatMessageResponse[] = [];
     public messageInput: FormControl;
 
     constructor(private coreService: CoreService) {
@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit {
 
             let json = JSON.parse(data);
 
-            let message: ChatMessage = {
+            let message: IChatMessageResponse = {
                 username: json.username,
                 message: json.message
             }
@@ -45,12 +45,6 @@ export class ChatComponent implements OnInit {
     }
 
     sendMessage() {
-        let message: ChatMessage = {
-            username: 'Player 1',
-            message: this.messageInput.value
-        }
-
-        console.log(JSON.stringify(message));
-        this.coreService.sendData("chat-message", JSON.stringify(message));
+        this.coreService.sendData("chat-message", JSON.stringify(this.messageInput.value));
     }
 }
