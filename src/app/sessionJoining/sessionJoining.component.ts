@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'session-joining',
@@ -11,12 +12,19 @@ import {ReactiveFormsModule} from "@angular/forms";
 })
 
 export class SessionJoiningComponent implements OnInit {
+    public sessionKey: FormControl;
 
-    constructor(private coreService: CoreService) {
-        //TODO
+    constructor(private coreService: CoreService,
+                private router: Router) {
+        this.sessionKey = new FormControl();
     }
 
     ngOnInit() {
-        //TODO
+        this.coreService.listen('join-successful', () =>
+                this.router.navigate(['game-loading']));
+    }
+
+    public joinSession() {
+        this.coreService.sendData('join-session', this.sessionKey.value);
     }
 }

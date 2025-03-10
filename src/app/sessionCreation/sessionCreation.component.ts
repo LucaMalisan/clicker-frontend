@@ -22,7 +22,7 @@ export class SessionCreationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.coreService.listen('session-creation-successful', () =>
+        this.coreService.listen('join-successful', () =>
                 this.router.navigate(['game-loading']));
     }
 
