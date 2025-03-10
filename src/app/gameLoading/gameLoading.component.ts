@@ -19,7 +19,7 @@ interface ISessionInfo {
 export class GameLoadingComponent implements OnInit {
 
     public sessionKey: string;
-    public joinedPlayers: string[] = ["TODO", "TODO", "TODO", "TODO"];
+    public joinedPlayers: string[] = [];
     public admin: boolean;
 
     constructor(private coreService: CoreService) {
@@ -35,5 +35,10 @@ export class GameLoadingComponent implements OnInit {
                 this.admin = json.admin;
             });
         });
+
+        this.coreService.listen('player-joined', (player: string) => {
+            console.log(player);
+            this.joinedPlayers.push(player)
+        })
     }
 }
