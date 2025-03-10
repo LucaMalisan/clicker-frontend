@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'session-creation',
@@ -12,11 +13,23 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 export class SessionCreationComponent implements OnInit {
 
-    constructor(private coreService: CoreService) {
-        //TODO
+    public duration: FormControl;
+    public errorMessage: string;
+
+    constructor(private coreService: CoreService,
+                private router: Router) {
+        this.duration = new FormControl();
     }
 
     ngOnInit() {
-        //TODO
+        this.coreService.listen('session-creation-successful', () =>
+                this.router.navigate(['game-loading']));
+    }
+
+    public createSession() {
+        debugger
+        this.coreService.sendData('create-session', this.duration.value, (response: string) => {
+            this.errorMessage = response
+        });
     }
 }
