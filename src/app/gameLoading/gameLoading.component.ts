@@ -5,6 +5,7 @@ import {NgForOf} from "@angular/common";
 
 interface ISessionInfo {
     sessionKey: string,
+    joinedPlayers: string[]
     admin: boolean
 }
 
@@ -31,6 +32,7 @@ export class GameLoadingComponent implements OnInit {
             this.coreService.sendData('get-session-info', '', (response: string) => {
                 console.log(`Received response ${response}`)
                 let json: ISessionInfo = JSON.parse(response);
+                this.joinedPlayers = json.joinedPlayers;
                 this.sessionKey = json.sessionKey;
                 this.admin = json.admin;
             });
