@@ -29,4 +29,10 @@ div.container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
+  margin-bottom: 40px;
+}
+
+button {
+  display: flex;
+  justify-self: center;
 }

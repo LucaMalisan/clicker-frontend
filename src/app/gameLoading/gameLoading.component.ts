@@ -3,6 +3,12 @@ import {CoreService} from "../core.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 
+interface ISessionInfo {
+    sessionKey: string,
+    joinedPlayers: string[]
+    admin: boolean
+}
+
 @Component({
     selector: 'game-loading',
     templateUrl: './gameLoading.component.html',
@@ -13,15 +19,28 @@ import {NgForOf} from "@angular/common";
 
 export class GameLoadingComponent implements OnInit {
 
-    public sessionKey: string = "TODO";
-    public joinedPlayers: string[] = ["TODO", "TODO", "TODO", "TODO"];
-    public admin: boolean = true;
+    public sessionKey: string;
+    public joinedPlayers: string[] = [];
+    public admin: boolean;
 
     constructor(private coreService: CoreService) {
         //TODO
     }
 
     ngOnInit() {
-        //TODO
+        this.coreService.initialized.subscribe(() => {
+            this.coreService.sendData('get-session-info', '', (response: string) => {
+                console.log(`Received response ${response}`)
+                let json: ISessionInfo = JSON.parse(response);
+                this.joinedPlayers = json.joinedPlayers;
+                this.sessionKey = json.sessionKey;
+                this.admin = json.admin;
+            });
+        });
+
+        this.coreService.listen('player-joined', (player: string) => {
+            console.log(player);
+            this.joinedPlayers.push(player)
+        })
     }
 }

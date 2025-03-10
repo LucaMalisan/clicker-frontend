@@ -2,6 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {DefaultEventsMap} from '@socket.io/component-emitter';
 import {io, Socket} from "socket.io-client";
 import {Router} from "@angular/router";
+import {ReplaySubject, Subject} from "rxjs";
 
 interface Tokens {
     jwt: string,
@@ -21,6 +22,7 @@ export class CoreService {
     //TODO env variable
     public url = 'http://localhost:3000';
     public socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+    public initialized: Subject<Boolean> = new ReplaySubject();
 
     constructor(private router: Router) {
         this.socket = io(this.url, {
@@ -46,6 +48,7 @@ export class CoreService {
                 }
 
                 localStorage.setItem('jwt', json.jwt);
+                this.initialized.next(true);
             });
         });
     }
