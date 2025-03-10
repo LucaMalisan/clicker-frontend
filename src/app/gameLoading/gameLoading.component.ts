@@ -3,6 +3,11 @@ import {CoreService} from "../core.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 
+interface ISessionInfo {
+    sessionKey: string,
+    admin: boolean
+}
+
 @Component({
     selector: 'game-loading',
     templateUrl: './gameLoading.component.html',
@@ -13,15 +18,22 @@ import {NgForOf} from "@angular/common";
 
 export class GameLoadingComponent implements OnInit {
 
-    public sessionKey: string = "TODO";
+    public sessionKey: string;
     public joinedPlayers: string[] = ["TODO", "TODO", "TODO", "TODO"];
-    public admin: boolean = true;
+    public admin: boolean;
 
     constructor(private coreService: CoreService) {
         //TODO
     }
 
     ngOnInit() {
-        //TODO
+        this.coreService.initialized.subscribe(() => {
+            this.coreService.sendData('get-session-info', '', (response: string) => {
+                console.log(`Received response ${response}`)
+                let json: ISessionInfo = JSON.parse(response);
+                this.sessionKey = json.sessionKey;
+                this.admin = json.admin;
+            });
+        });
     }
 }
