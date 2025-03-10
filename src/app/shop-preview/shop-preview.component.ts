@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-shop-preview',
   imports: [],
   templateUrl: './shop-preview.component.html',
-  styleUrl: './shop-preview.component.scss'
+  styleUrl: './shop-preview.component.css'
 })
 export class ShopPreviewComponent {
 

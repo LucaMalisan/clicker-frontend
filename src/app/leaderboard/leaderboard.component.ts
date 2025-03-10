@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'app-leaderboard',
   imports: [NgFor],
   templateUrl: './leaderboard.component.html',
-  styleUrl: './leaderboard.component.scss'
+  styleUrl: './leaderboard.component.css'
 })
 export class LeaderboardComponent {
   players = [

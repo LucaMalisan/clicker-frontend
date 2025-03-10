@@ -12,7 +12,7 @@ interface FloatingText {
   selector: 'app-game',
   imports: [NgFor, LeaderboardComponent, ShopPreviewComponent],
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'],
+  styleUrls: ['./game.component.css'],
 })
 export class GameComponent {
   username: string = "H4ckerman";
