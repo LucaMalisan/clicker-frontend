@@ -7,6 +7,7 @@ import {AppComponent} from "./app.component";
 import {SessionCreationComponent} from "./sessionCreation/sessionCreation.component";
 import {SessionJoiningComponent} from "./sessionJoining/sessionJoining.component";
 import {GameLoadingComponent} from "./gameLoading/gameLoading.component";
+import {GameComponent} from "./game/game.component";
 
 const routes: Routes = [
     {path: '', component: AppComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
     {path: 'chat', component: ChatComponent},
     {path: 'session-creation', component: SessionCreationComponent},
     {path: 'session-joining', component: SessionJoiningComponent},
-    {path: 'game-loading', component: GameLoadingComponent}
+    {path: 'game-loading', component: GameLoadingComponent},
+    {path: 'game', component: GameComponent}
 ];
 
 @NgModule({

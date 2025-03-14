@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import { ShopPreviewComponent } from '../shop-preview/shop-preview.component';
+import {TimerComponent} from "../timer/timer.component";
 
 interface FloatingText {
   x: number;
@@ -10,7 +11,7 @@ interface FloatingText {
 
 @Component({
   selector: 'app-game',
-  imports: [NgFor, LeaderboardComponent, ShopPreviewComponent],
+    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
 })
