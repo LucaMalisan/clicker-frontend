@@ -41,15 +41,16 @@ export class TimerComponent implements OnInit {
 
     protected refreshTime(deadlineInMillis: number) {
         let diff = deadlineInMillis - Date.now();
-        this.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        this.minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        this.seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        this.hours = Math.max(0, Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        this.minutes = Math.max(0, Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
+        this.seconds = Math.max(0, Math.floor((diff % (1000 * 60)) / 1000));
         this.progress(diff);
     }
 
     protected progress(timeLeft: number): void {
         let element = document.getElementById("progressBar") as HTMLElement;
         let progressBarWidth = timeLeft * element.clientWidth / this.totalDurationInMs;
+        console.log(progressBarWidth)
         element.querySelector('div').style.width = `${progressBarWidth}px`;
     };
 }
