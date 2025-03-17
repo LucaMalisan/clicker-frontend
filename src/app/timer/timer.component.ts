@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-timer',
@@ -9,13 +10,21 @@ import {CoreService} from "../core.service";
 })
 export class TimerComponent implements OnInit {
 
-    constructor(protected coreService: CoreService) {
+    constructor(protected coreService: CoreService,
+                protected router: Router) {
     }
+
+    protected intervalId: any;
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
             this.coreService.sendData("ready-for-game-start", "");
             this.coreService.listen("start-timer", (duration: string) => this.startTimer(parseInt(duration)));
+            this.coreService.listen("stop-session", () => {
+                console.log("stop-session");
+                clearInterval(this.intervalId);
+                this.router.navigate(["session-joining"])
+            })
         });
     }
 
@@ -27,7 +36,7 @@ export class TimerComponent implements OnInit {
     protected startTimer(durationMinutes: number): void {
         this.totalDurationInMs = durationMinutes * 60 * 1000;
         let deadline = Date.now() + this.totalDurationInMs;
-        setInterval(() => this.refreshTime(deadline), 1000);
+        this.intervalId = setInterval(() => this.refreshTime(deadline), 1000);
     }
 
     protected refreshTime(deadlineInMillis: number) {
@@ -35,8 +44,6 @@ export class TimerComponent implements OnInit {
         this.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         this.minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         this.seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        console.log(diff);
         this.progress(diff);
     }
 
