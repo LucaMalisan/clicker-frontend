@@ -50,7 +50,6 @@ export class TimerComponent implements OnInit {
     protected progress(timeLeft: number): void {
         let element = document.getElementById("progressBar") as HTMLElement;
         let progressBarWidth = timeLeft * element.clientWidth / this.totalDurationInMs;
-        console.log(progressBarWidth)
         element.querySelector('div').style.width = `${progressBarWidth}px`;
     };
 }

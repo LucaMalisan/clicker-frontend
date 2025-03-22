@@ -1,44 +1,77 @@
-import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
-import { ShopPreviewComponent } from '../shop-preview/shop-preview.component';
+import {Component, OnInit} from '@angular/core';
+import {NgFor} from '@angular/common';
+import {LeaderboardComponent} from '../leaderboard/leaderboard.component';
+import {ShopPreviewComponent} from '../shop-preview/shop-preview.component';
 import {TimerComponent} from "../timer/timer.component";
+import {CoreService} from "../core.service";
+import {Router} from "@angular/router";
 
 interface FloatingText {
-  x: number;
-  y: number;
+    x: number;
+    y: number;
+}
+
+interface ISessionInfo {
+    sessionKey: string,
+    joinedPlayers: any[]
+    admin: boolean
 }
 
 @Component({
-  selector: 'app-game',
+    selector: 'app-game',
     imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent],
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css'],
+    templateUrl: './game.component.html',
+    styleUrls: ['./game.component.css'],
 })
-export class GameComponent {
-  username: string = "H4ckerman";
-  score: number = 0;
-  floatingTexts: FloatingText[] = [];
-  virusAmountGained: number = 1;
+export class GameComponent implements OnInit {
 
-  addVirus(event: MouseEvent) {
-    this.score++;
-    // here we will have to implement the backend call as well 
-    console.log("Yippie, Backend call one day");
+    public score: number = 0;
+    public username: string = "H4ckerman";
+    public newButtonClicks: number = 0;
+    public floatingTexts: FloatingText[] = [];
+    public virusAmountGained: number = 1;
 
-    // Get button position for floating text
-    const button = event.target as HTMLElement;
-    const rect = button.getBoundingClientRect();
+    constructor(private coreService: CoreService,
+                private router: Router) {
+    }
 
-    // Generate random offset near the button for floating text
-    const randomX = rect.left + rect.width / 2 + (Math.random() * 200 - 150);
-    const randomY = rect.top + rect.height / 2 + (Math.random() * 100 - 50);
+    ngOnInit(): void {
+        this.coreService.initialized.subscribe(() => {
+            this.coreService.sendData("get-session-info", "", (sessionInfo: string) => {
+                let json: ISessionInfo = JSON.parse(sessionInfo);
 
-    const newText: FloatingText = { x: randomX, y: randomY };
-    this.floatingTexts.push(newText);
+                if (!json.sessionKey) {
+                    this.router.navigate(["session-joining"])
+                }
+            });
 
-    setTimeout(() => {
-      this.floatingTexts.shift();
-    }, 2000);
-  }
+            setInterval(() => {
+                if (this.newButtonClicks > 0) {
+                    this.coreService.sendData("handle-button-clicks", this.newButtonClicks + "", (currentScore: string) => {
+                        this.score = parseInt(currentScore);
+                    });
+                    this.newButtonClicks = 0;
+                }
+            }, 250);
+        })
+    }
+
+    addVirus(event: MouseEvent) {
+        this.newButtonClicks++;
+
+        // Get button position for floating text
+        const button = event.target as HTMLElement;
+        const rect = button.getBoundingClientRect();
+
+        // Generate random offset near the button for floating text
+        const randomX = rect.left + rect.width / 2 + (Math.random() * 200 - 150);
+        const randomY = rect.top + rect.height / 2 + (Math.random() * 100 - 50);
+
+        const newText: FloatingText = {x: randomX, y: randomY};
+        this.floatingTexts.push(newText);
+
+        setTimeout(() => {
+            this.floatingTexts.shift();
+        }, 2000);
+    }
 }

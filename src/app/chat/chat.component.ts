@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
 import {NgForOf} from "@angular/common";
 
 interface IChatMessageResponse {
