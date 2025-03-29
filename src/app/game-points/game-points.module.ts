@@ -12,15 +12,13 @@ import {CoreService} from "../core.service";
 })
 export class GamePointsModule implements OnInit {
 
-    public points: number = 0;
-
     constructor(protected coreService: CoreService) {
     }
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
             this.coreService.listen("points", (points: string) => {
-                this.points = parseInt(points)
+                this.coreService.points = parseInt(points)
             });
         })
     }

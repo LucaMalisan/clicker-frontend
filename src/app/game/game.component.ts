@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgFor} from '@angular/common';
 import {LeaderboardComponent} from '../leaderboard/leaderboard.component';
 import {ShopPreviewComponent} from '../shop-preview/shop-preview.component';
@@ -31,9 +31,11 @@ export class GameComponent implements OnInit {
     public floatingTexts: FloatingText[] = [];
     public virusAmountGained: number = 1;
 
-    constructor(private coreService: CoreService,
+    constructor(protected coreService: CoreService,
                 private router: Router) {
     }
+
+    @ViewChild(GamePointsModule) gamePoints!: GamePointsModule;
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
