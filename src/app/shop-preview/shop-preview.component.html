@@ -1,7 +1,7 @@
 <main class="shop-container">
     <h1 class="shop-title">Shop</h1>
     <div class="categories" *ngFor="let entry of effects">
-        <button class="category-item" action="{{entry.route}}" [disabled]="coreService.points < parseInt(entry.cost)">
+        <button class="category-item" (click)="handleEffectClick(entry)" [disabled]="coreService.points < parseInt(entry.cost)">
             <ul>
                 <li><b> {{ entry.name }} </b></li>
                 <li><i> {{ entry.description }}</i></li>

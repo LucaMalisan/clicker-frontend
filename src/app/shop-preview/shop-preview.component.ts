@@ -27,23 +27,23 @@ export class ShopPreviewComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
-
                     this.coreService.sendData("get-effects", "", (effects: string) => {
                         console.log(effects);
                         let json = JSON.parse(effects);
                         json.forEach((e: IEffect) => this.effects.push(e));
                     });
-
-                    Array.from(document.getElementsByClassName("category-item")).forEach(e => {
-                        e.addEventListener("click", ev => {
-                            let target = ev.target as HTMLButtonElement;
-                            console.log(target.getAttribute("action"))
-                            this.coreService.points -= 50;
-                            this.coreService.sendData("start-async-gen", "")
-                        })
-                    })
                 }
         );
+    }
+
+    handleEffectClick(effect: IEffect) {
+        if (this.coreService.points > parseInt(effect.cost)) {
+            this.coreService.points -= parseInt(effect.cost);
+            this.coreService.sendData(effect.route, "", (updatedEffects: string) => {
+                console.log(updatedEffects);
+                this.effects = JSON.parse(updatedEffects);
+            })
+        }
     }
 
     protected readonly parseInt = parseInt;
