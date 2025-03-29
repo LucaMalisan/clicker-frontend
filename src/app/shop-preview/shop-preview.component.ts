@@ -6,7 +6,8 @@ interface IEffect {
     name: string,
     description: string,
     cost: string,
-    route: string
+    route: string,
+    icon: string
 }
 
 @Component({
@@ -20,6 +21,7 @@ interface IEffect {
 export class ShopPreviewComponent implements OnInit {
 
     protected effects: IEffect[] = [];
+    protected updateInProgress = false;
 
     constructor(protected coreService: CoreService,
     ) {
@@ -37,12 +39,15 @@ export class ShopPreviewComponent implements OnInit {
     }
 
     handleEffectClick(effect: IEffect) {
-        if (this.coreService.points > parseInt(effect.cost)) {
+        if (!this.updateInProgress && this.coreService.points >= parseInt(effect.cost)) {
+            this.updateInProgress = true;
             this.coreService.points -= parseInt(effect.cost);
+
             this.coreService.sendData(effect.route, "", (updatedEffects: string) => {
                 console.log(updatedEffects);
                 this.effects = JSON.parse(updatedEffects);
-            })
+                this.updateInProgress = false;
+            });
         }
     }
 
