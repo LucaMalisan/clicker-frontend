@@ -23,6 +23,7 @@ export class CoreService {
     public url = 'http://localhost:3000';
     public socket: Socket<DefaultEventsMap, DefaultEventsMap>;
     public initialized: Subject<Boolean> = new ReplaySubject();
+    public points: number = 0;
 
     constructor(private router: Router) {
         this.socket = io(this.url, {
@@ -61,5 +62,9 @@ export class CoreService {
 
     listen(event: string, handler: (data: any) => void) {
         this.socket.on(event, handler);
+    }
+
+    stopListen(event: string) {
+        this.socket.off(event);
     }
 }

@@ -5,6 +5,7 @@ import {ShopPreviewComponent} from '../shop-preview/shop-preview.component';
 import {TimerComponent} from "../timer/timer.component";
 import {CoreService} from "../core.service";
 import {Router} from "@angular/router";
+import {GamePointsModule} from "../game-points/game-points.module";
 
 interface FloatingText {
     x: number;
@@ -19,14 +20,12 @@ interface ISessionInfo {
 
 @Component({
     selector: 'app-game',
-    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent],
+    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent, GamePointsModule],
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
 
-    public score: number = 0;
-    public username: string = "H4ckerman";
     public newButtonClicks: number = 0;
     public floatingTexts: FloatingText[] = [];
     public virusAmountGained: number = 1;
@@ -47,9 +46,7 @@ export class GameComponent implements OnInit {
 
             setInterval(() => {
                 if (this.newButtonClicks > 0) {
-                    this.coreService.sendData("handle-button-clicks", this.newButtonClicks + "", (currentScore: string) => {
-                        this.score = parseInt(currentScore);
-                    });
+                    this.coreService.sendData("handle-button-clicks", this.newButtonClicks + "");
                     this.newButtonClicks = 0;
                 }
             }, 250);

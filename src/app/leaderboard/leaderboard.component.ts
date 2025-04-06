@@ -13,6 +13,7 @@ interface ILeaderBoardEntry {
     templateUrl: './leaderboard.component.html',
     styleUrl: './leaderboard.component.css'
 })
+
 export class LeaderboardComponent implements OnInit {
 
     protected leaderboard: ILeaderBoardEntry[];
@@ -21,8 +22,10 @@ export class LeaderboardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.coreService.listen("leaderboard", (leaderboard: string) => {
-            this.leaderboard = JSON.parse(leaderboard);
-        })
+        this.coreService.initialized.subscribe(() => {
+            this.coreService.listen("leaderboard", (leaderboard: string) => {
+                this.leaderboard = JSON.parse(leaderboard);
+            });
+        });
     }
 }
