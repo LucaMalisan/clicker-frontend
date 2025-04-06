@@ -28,14 +28,14 @@ export class TimerComponent implements OnInit {
         });
     }
 
-    protected totalDurationInMs: number;
+    protected durationInMs: number;
     public hours: number;
     public minutes: number;
     public seconds: number;
 
-    protected startTimer(durationMinutes: number): void {
-        this.totalDurationInMs = durationMinutes * 60 * 1000;
-        let deadline = Date.now() + this.totalDurationInMs;
+    protected startTimer(durationInMs: number): void {
+        this.durationInMs = durationInMs;
+        let deadline = Date.now() + this.durationInMs;
         this.intervalId = setInterval(() => this.refreshTime(deadline), 1000);
     }
 
@@ -49,7 +49,7 @@ export class TimerComponent implements OnInit {
 
     protected progress(timeLeft: number): void {
         let element = document.getElementById("progressBar") as HTMLElement;
-        let progressBarWidth = timeLeft * element.clientWidth / this.totalDurationInMs;
+        let progressBarWidth = timeLeft * element.clientWidth / this.durationInMs;
         element.querySelector('div').style.width = `${progressBarWidth}px`;
     };
 }
