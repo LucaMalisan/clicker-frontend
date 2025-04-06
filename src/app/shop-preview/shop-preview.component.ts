@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {NgForOf} from "@angular/common";
+import {GamePointsModule} from "../game-points/game-points.module";
 
 interface IEffect {
     name: string,
@@ -24,13 +25,14 @@ export class ShopPreviewComponent implements OnInit {
     protected updateInProgress = false;
 
     constructor(protected coreService: CoreService,
+                protected gamePoints: GamePointsModule
     ) {
     }
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
                     this.coreService.sendData("get-effects", "", (effects: string) => {
-                        console.log(effects);
+                        console.log("effects: " + effects);
                         let json = JSON.parse(effects);
                         json.forEach((e: IEffect) => this.effects.push(e));
                     });
@@ -39,14 +41,16 @@ export class ShopPreviewComponent implements OnInit {
     }
 
     handleEffectClick(effect: IEffect) {
+        this.gamePoints.stopListening();
+
         if (!this.updateInProgress && this.coreService.points >= parseInt(effect.cost)) {
             this.updateInProgress = true;
             this.coreService.points -= parseInt(effect.cost);
 
             this.coreService.sendData(effect.route, "", (updatedEffects: string) => {
-                console.log(updatedEffects);
                 this.effects = JSON.parse(updatedEffects);
                 this.updateInProgress = false;
+                this.gamePoints.startListening()
             });
         }
     }

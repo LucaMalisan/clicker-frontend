@@ -26,7 +26,6 @@ interface ISessionInfo {
 })
 export class GameComponent implements OnInit {
 
-    public username: string = "H4ckerman";
     public newButtonClicks: number = 0;
     public floatingTexts: FloatingText[] = [];
     public virusAmountGained: number = 1;

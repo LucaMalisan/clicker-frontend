@@ -63,4 +63,8 @@ export class CoreService {
     listen(event: string, handler: (data: any) => void) {
         this.socket.on(event, handler);
     }
+
+    stopListen(event: string) {
+        this.socket.off(event);
+    }
 }

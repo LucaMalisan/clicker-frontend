@@ -1,4 +1,4 @@
-import {Component, NgModule, OnInit} from '@angular/core';
+import {Component, Injectable, NgModule, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CoreService} from "../core.service";
 
@@ -10,6 +10,10 @@ import {CoreService} from "../core.service";
     templateUrl: './gamePoints.component.html',
     styleUrls: ['./gamePoints.component.css'],
 })
+@Injectable({
+    providedIn: 'root'
+})
+
 export class GamePointsModule implements OnInit {
 
     constructor(protected coreService: CoreService) {
@@ -17,9 +21,17 @@ export class GamePointsModule implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.listen("points", (points: string) => {
-                this.coreService.points = parseInt(points)
-            });
+            this.startListening();
         })
+    }
+
+    public startListening() {
+        this.coreService.listen("points", (points: string) => {
+            this.coreService.points = parseInt(points)
+        });
+    }
+
+    public stopListening() {
+        this.coreService.stopListen("points");
     }
 }
