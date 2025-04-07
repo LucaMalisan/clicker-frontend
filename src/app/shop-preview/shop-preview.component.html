@@ -1,14 +1,17 @@
 <main class="shop-container">
     <h1 class="shop-title">Shop</h1>
-    <div class="categories" *ngFor="let entry of effects">
-        <button class="category-item" (click)="handleEffectClick(entry)" [disabled]="coreService.points < parseInt(entry.cost)">
-            <span class="material-symbols-outlined">{{entry.icon}}</span>
-            <ul>
-                <li><b> {{ entry.name }} </b></li>
-                <li><i> {{ entry.description }}</i></li>
-                <li> Kosten: {{ entry.cost }} Viren</li>
-            </ul>
-        </button>
+
+    <div class="row">
+        <div class="categories" *ngFor="let entry of effects">
+            <button class="category-item" (click)="handleEffectClick(entry)" [disabled]="coreService.points < parseInt(entry.cost)">
+                <span class="material-symbols-outlined">{{entry.icon}}</span>
+                <ul>
+                    <li><b> {{ entry.name }} </b></li>
+                    <li><i> {{ entry.description }}</i></li>
+                    <li> Kosten: {{ entry.cost }} Viren</li>
+                </ul>
+            </button>
+        </div>
     </div>
 </main>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
