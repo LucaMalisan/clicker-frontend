@@ -1,4 +1,8 @@
-
+div.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
 .shop-container {
     display: flex;
@@ -26,7 +30,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
   }
   
   .category-item {
