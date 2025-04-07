@@ -10,8 +10,10 @@
     margin: auto;
     margin-bottom: 20px;
     padding: 20px;
-    background-color: var(--tertiary-background);
+    background-color: var(--secondary-background);
     border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px var(--border-color) solid;
   }
   
 
@@ -30,9 +32,10 @@
   .category-item {
     padding: 15px 30px;
     font-size: 1rem;
-    border: none;
+    border: 1px var(--border-color) solid;
     border-radius: 10px;
     cursor: pointer;
+    background: var(--secondary-button-gradient) !important;
   }
   
 

@@ -1,5 +1,78 @@
+:root {
+  /* Primary Colors */
+  --primary-button-gradient: linear-gradient(45deg, #ff0000, #ff8400);
+  --secondary-button-gradient: linear-gradient(45deg, #008f4c, #09ff8c);
+
+
+  /* Neutral Colors */
+  --background-gradient: linear-gradient(45deg, #6dbb73, #29ec39);
+  --secondary-background: #f2a957;
+  --text-primary:   #483338; /* Main text #f0f5f0; */
+  --text-secondary: #B0B0B0;  /* Muted/descriptions */
+  --border-color: #303030;  /* Borders & dividers */
+
+  /* Accent Colors */
+  --success-color: #00FF88;  /* Cyber Green */
+  --warning-color: #FFD700;  /* Alert Yellow */
+  --disabled-color: #773B00;  /* Dimmed Red-Orange */
+
+  /* Contrasting Colors for buffs / effects etc. */
+  --contrast-primary: #9c4dcc;
+  --contrast-secondary: #ffd700;
+  --contrast-tertiary: #66ffcc;
+}
+
 /* You can add global styles to this file, and also import other style files */
 p.error {
   color: red;
   max-width: 300px;
+}
+
+button {
+  font-size: 32px;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary-button-gradient);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 15p
+}
+
+body {
+  background-image: var(--background-gradient);
+}
+
+h1, h2 {
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 30px;
+  gap: 10px;
+  background-color: lightgray;
+  border-radius: 30px;
+  justify-content: space-between;
+}
+
+.input-field {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 0px 15px 25px 15px;
+  font-size: 16px;
 }

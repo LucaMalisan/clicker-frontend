@@ -21,7 +21,7 @@ interface ISessionInfo {
 export class GameLoadingComponent implements OnInit {
 
     public sessionKey: string;
-    public joinedPlayers: string[] = [];
+    public joinedPlayers: string[] = ['test1', 'test2', 'test23', 'h4ckerm4n', 'lol2237', 'beeg Problemman234234234', 'Jo Set', 'yippieyippieyippieyippieyippieyippieeeeeeeeeeeeeeeeeeeeeeeeeeeeee'];
     public admin: boolean;
 
     constructor(private coreService: CoreService,
