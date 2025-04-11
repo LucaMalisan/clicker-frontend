@@ -8,7 +8,8 @@ interface IEffect {
     description: string,
     cost: string,
     route: string,
-    icon: string
+    icon: string,
+    disabled: boolean
 }
 
 @Component({
@@ -22,7 +23,6 @@ interface IEffect {
 export class ShopPreviewComponent implements OnInit {
 
     protected effects: IEffect[] = [];
-    protected updateInProgress = false;
 
     constructor(protected coreService: CoreService,
                 protected gamePoints: GamePointsModule
@@ -32,9 +32,12 @@ export class ShopPreviewComponent implements OnInit {
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
                     this.coreService.sendData("get-effects", "", (effects: string) => {
-                        console.log("effects: " + effects);
                         let json = JSON.parse(effects);
                         json.forEach((e: IEffect) => this.effects.push(e));
+                    });
+
+                    this.coreService.listen("reactivate-effect", (effectName: string) => {
+                        this.setEffectDisabled(effectName, false)
                     });
                 }
         );
@@ -43,16 +46,21 @@ export class ShopPreviewComponent implements OnInit {
     handleEffectClick(effect: IEffect) {
         this.gamePoints.stopListening();
 
-        if (!this.updateInProgress && this.coreService.points >= parseInt(effect.cost)) {
-            this.updateInProgress = true;
+        if (this.coreService.points >= parseInt(effect.cost)) {
+            this.setEffectDisabled(effect.name, true)
             this.coreService.points -= parseInt(effect.cost);
 
             this.coreService.sendData(effect.route, "", (updatedEffects: string) => {
+                let disabled = effect.disabled;
                 this.effects = JSON.parse(updatedEffects);
-                this.updateInProgress = false;
+                this.setEffectDisabled(effect.name, disabled) //keep disabled status
                 this.gamePoints.startListening()
             });
         }
+    }
+
+    protected setEffectDisabled(effectName: string, disabled: boolean) {
+        this.effects.filter(e => e.name === effectName).forEach(e => e.disabled = disabled);
     }
 
     protected readonly parseInt = parseInt;
