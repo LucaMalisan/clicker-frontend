@@ -3,7 +3,8 @@
 
     <div class="row">
         <div class="categories" *ngFor="let entry of effects">
-            <button class="category-item" (click)="handleEffectClick(entry)" [disabled]="coreService.points < parseInt(entry.cost)">
+            <button class="category-item" id="{{entry.name}}" (click)="handleEffectClick(entry)"
+                    [disabled]="(coreService.points < parseInt(entry.cost)) || entry.disabled">
                 <span class="material-symbols-outlined">{{entry.icon}}</span>
                 <ul>
                     <li><b> {{ entry.name }} </b></li>
