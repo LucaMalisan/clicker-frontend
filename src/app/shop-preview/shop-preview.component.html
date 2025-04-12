@@ -12,6 +12,7 @@
                     <li> Kosten: {{ entry.cost }} Viren</li>
                 </ul>
             </button>
+            <div class="spinner" [hidden]="!entry.disabled"></div>
         </div>
     </div>
 </main>
