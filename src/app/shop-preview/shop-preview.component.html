@@ -5,15 +5,15 @@
         <div class="categories" *ngFor="let entry of effects">
             <button class="category-item" id="{{entry.name}}" (click)="handleEffectClick(entry)"
                     [disabled]="(coreService.points < parseInt(entry.cost)) || entry.disabled">
-                <span class="material-symbols-outlined">{{entry.icon}}</span>
+                <span class="material-symbols-outlined">{{ entry.icon }}</span>
                 <ul>
                     <li><b> {{ entry.name }} </b></li>
                     <li><i> {{ entry.description }}</i></li>
                     <li> Kosten: {{ entry.cost }} Viren</li>
                 </ul>
             </button>
-            <div class="spinner" [hidden]="!entry.disabled"></div>
+            <div [ngClass]="{'spinner': true, 'hidden': !entry.disabled}"></div>
         </div>
     </div>
 </main>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>

@@ -1,0 +1,11 @@
+<div id="effect-log">
+    <h3> Active Effects </h3>
+    <ul *ngFor="let entry of userInfluencingEffects">
+        <li> {{ entry.effectName }} (activated by {{ entry.userName }})</li>
+    </ul>
+    <div class="divider"></div>
+    <h3> Effects influencing other players </h3>
+    <ul *ngFor="let entry of userActivatedEffects">
+        <li> {{ entry.effectName }} (influencing {{ entry.userName }})</li>
+    </ul>
+</div>
