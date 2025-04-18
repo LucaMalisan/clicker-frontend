@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
-import {NgForOf} from "@angular/common";
+import {NgClass, NgForOf} from "@angular/common";
 import {GamePointsModule} from "../game-points/game-points.module";
 
 interface IEffect {
@@ -15,7 +15,8 @@ interface IEffect {
 @Component({
     selector: 'app-shop-preview',
     imports: [
-        NgForOf
+        NgForOf,
+        NgClass
     ],
     templateUrl: './shop-preview.component.html',
     styleUrl: './shop-preview.component.css'
@@ -31,7 +32,7 @@ export class ShopPreviewComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
-                    this.coreService.sendData("get-effects", "", (effects: string) => {
+                    this.coreService.sendData("get-available-effects", "", (effects: string) => {
                         let json = JSON.parse(effects);
                         json.forEach((e: IEffect) => this.effects.push(e));
                     });

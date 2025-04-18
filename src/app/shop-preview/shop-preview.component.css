@@ -38,7 +38,11 @@ div.row {
     border: 1px var(--border-color) solid;
     border-radius: 10px;
     cursor: pointer;
-    background: var(--secondary-button-gradient) !important;
+    background: var(--secondary-button-gradient);
+  }
+
+  .category-item[disabled] {
+    background: lightgray;
   }
 
   .spinner {
@@ -53,6 +57,10 @@ div.row {
     -webkit-animation:spin 1s linear infinite;
     -moz-animation:spin 1s linear infinite;
     animation:spin 1s linear infinite;
+  }
+
+  .spinner.hidden {
+    display: none;
   }
 
 @-moz-keyframes spin {

@@ -1,0 +1,10 @@
+#effect-log {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 15vw;
+  background-color: var(--contrast-tertiary);
+  margin-top: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
