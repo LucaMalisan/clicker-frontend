@@ -20,7 +20,7 @@ User Effekt mapped effekt auf User
   - **activationRoute** start-async-gen (bsp. Luca async effekt)
 
 
-- [ ] Auto Clicker
+- [X] Auto Clicker
   - **Name** Auto Clicker // schon umgesetzt (autoclicker)
   - **duration** 300s
   - **maxLevel** 5
@@ -31,7 +31,7 @@ User Effekt mapped effekt auf User
   - **pathToIcon** 
   - **activationRoute**
 
-- [ ] Exponentieller Virus Generator
+- [X] Exponentieller Virus Generator
   - **Name** Exponentieller Virus Generator
   - **duration** 20s
   - **maxLevel** 3
@@ -42,7 +42,7 @@ User Effekt mapped effekt auf User
   - **pathToIcon** 
   - **activationRoute**
 
-- [ ] Kritische Viren
+- [X] Kritische Viren
   -  **Name** Kritische Viren
   - **duration** 60s
   - **maxLevel** 4
@@ -55,7 +55,7 @@ User Effekt mapped effekt auf User
 
 ## Negativ
 
-- [ ] Reverse Engineered Virus
+- [X] Reverse Engineered Virus
   - **Name** Reverse Engineered Virus
   - **duration** 10s
   - **maxLevel** 1
