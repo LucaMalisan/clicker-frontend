@@ -39,6 +39,7 @@ export class GameComponent implements OnInit {
         this.coreService.initialized.subscribe(() => {
             this.coreService.sendData("get-session-info", "", (sessionInfo: string) => {
                 let json: ISessionInfo = JSON.parse(sessionInfo);
+                console.log(json);
 
                 if (!json.sessionKey) {
                     this.router.navigate(["session-joining"])
