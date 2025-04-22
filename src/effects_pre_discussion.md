@@ -8,7 +8,7 @@ User Effekt mapped effekt auf User
 # Effektideen
 
 ## Positiv
-### Turbo Clicker
+- [ ] Turbo Clicker
 - **Name** Turbo Clicker
 - **duration** permanent / 0 
 - **maxLevel** 5
@@ -19,7 +19,7 @@ User Effekt mapped effekt auf User
 - **pathToIcon** /src/res/images/bild.jpg (random beispiel)
 - **activationRoute** start-async-gen (bsp. Luca async effekt)
 
-### Auto Clicker
+- [ ] Auto Clicker
 - **Name** Auto Clicker // schon umgesetzt (autoclicker)
 - **duration** 300s
 - **maxLevel** 5
@@ -30,7 +30,7 @@ User Effekt mapped effekt auf User
 - **pathToIcon** 
 - **activationRoute**
 
-### Exponentieller Virus Generator
+- [ ] Exponentieller Virus Generator
 - **Name** Exponentieller Virus Generator
 - **duration** 20s
 - **maxLevel** 3
@@ -41,8 +41,7 @@ User Effekt mapped effekt auf User
 - **pathToIcon** 
 - **activationRoute**
 
-
-### Kritische Viren
+- [ ] Kritische Viren
 - **Name** Kritische Viren
 - **duration** 60s
 - **maxLevel** 4
@@ -55,7 +54,7 @@ User Effekt mapped effekt auf User
 
 ## Negativ
 
-### Reverse Engineered Virus
+- [ ] Reverse Engineered Virus
 - **Name** Reverse Engineered Virus
 - **duration** 10s
 - **maxLevel** 1
@@ -69,8 +68,7 @@ User Effekt mapped effekt auf User
 - Idee von Luca -> Pendent zum Critical Click. % Chance, dass jemand - Virus kriegt chance
 - Prio 2 da ähnlich zu absauger
 
-
-### DDoS
+- [ ] DDoS
 - **Name** DDoS
 - **duration** 20s
 - **maxLevel** 4
@@ -81,7 +79,7 @@ User Effekt mapped effekt auf User
 - **pathToIcon** 
 - **activationRoute**
 
-### Virus der die Punkte anderer Leute absaugt
+- [ ] Virus der die Punkte anderer Leute absaugt
 - **Name** Virus der die Punkte anderer Leute absaugt
 - **duration** 30s
 - **maxLevel** 4
@@ -92,7 +90,7 @@ User Effekt mapped effekt auf User
 - **pathToIcon** 
 - **activationRoute**
 
-### Pop-Up-Inator3000
+- [ ] Pop-Up-Inator3000
 - **Name** Pop-Up-Inator3000
 - **duration** 0s
 - **maxLevel** 1
@@ -106,9 +104,10 @@ User Effekt mapped effekt auf User
 - Für erste Version: Alert Windows
 - Generiere Alert Windows on Virus-Click
 - Könnte auch über eine Dauer at random intervals pop ups erstellen / layoutshit etc...
+
 ## Speziell?
 
-### Glücksspiel Virus
+- [ ] Glücksspiel Virus
 - **Name** Glücksspiel Virus
 - **duration** 0
 - **maxLevel** 1
@@ -123,7 +122,7 @@ User Effekt mapped effekt auf User
 
 - 1. Version als Standard-Funktion ohne andere Spieler
 
-### Kommunismus Virus
+- [ ] Kommunismus Virus
 - **Name** Kommunismus Virus
 - **duration** 0s
 - **maxLevel** 1
