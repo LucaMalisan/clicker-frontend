@@ -118,3 +118,13 @@ app-timer {
   text-align: center;
   width: 15%;
 }
+
+app-login, app-registration {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
