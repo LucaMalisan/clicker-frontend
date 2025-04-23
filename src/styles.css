@@ -63,9 +63,7 @@ body {
   /*background-image: var(--background-gradient);*/
   background: repeating-conic-gradient(
       from 0deg,
-      #1a5e37 0deg 10deg, /* Dunkleres Grün */
-      #2e7d32 10deg 20deg, /* Helles Grün */
-      #1a5e37 20deg 30deg /* Wieder dunkleres Grün */
+      #1a5e37 0deg 10deg, /* Dunkleres Grün */ #2e7d32 10deg 20deg, /* Helles Grün */ #1a5e37 20deg 30deg /* Wieder dunkleres Grün */
   );
 }
 
@@ -119,7 +117,7 @@ app-timer {
   width: 15%;
 }
 
-app-login, app-registration {
+app-login, app-registration, session-joining, session-creation {
   align-self: center;
   display: flex;
   flex-direction: column;

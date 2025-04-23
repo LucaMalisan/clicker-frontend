@@ -4,7 +4,7 @@
     <div class="tile">
         <div class="tile-row">
             <label> Select duration [min] </label>
-            <input type="number" min="0" [formControl]="duration"/>
+            <input type="number" class="input-field" min="0" [formControl]="duration"/>
         </div>
         <button type="submit" (click)="createSession()"> Generate</button>
         <p class="error"> {{ errorMessage }}</p>
