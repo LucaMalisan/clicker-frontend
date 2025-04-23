@@ -4,13 +4,10 @@
     <div class="row">
         <div class="categories" *ngFor="let entry of effects">
             <button class="category-item" id="{{entry.name}}" (click)="handleEffectClick(entry)"
-                    [disabled]="(coreService.points < parseInt(entry.cost)) || entry.disabled">
+                    [disabled]="(coreService.points < parseInt(entry.cost)) || entry.disabled" title="{{entry.description}}">
                 <span class="material-symbols-outlined">{{ entry.icon }}</span>
-                <ul>
-                    <li><b> {{ entry.name }} </b></li>
-                    <li><i> {{ entry.description }}</i></li>
-                    <li> Kosten: {{ entry.cost }} Viren</li>
-                </ul>
+                    <b> {{ entry.name }} </b>
+                    <i> Kosten: {{ entry.cost }} Viren </i>
             </button>
             <div [ngClass]="{'spinner': true, 'hidden': !entry.disabled}"></div>
         </div>

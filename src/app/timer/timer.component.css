@@ -3,8 +3,7 @@ h1 {
 }
 
 div.container {
-  width: 15%;
-  position: absolute;
+  width: 100%;
 }
 
 p span {
@@ -55,6 +54,23 @@ li {
   margin: 10px auto;
   height: 22px;
   background-color: #efd0d0;
+  box-shadow:
+      0 0 10px #00ffff, /* Cyan-Glow (äußerer Rand) */
+      0 0 20px #00ffff;
+  animation: blueFlame 1.5s infinite alternate; /* Flammenanimation */
+}
+
+@keyframes blueFlame {
+  0% {
+    box-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
+  }
+  100% {
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 25px #00ffff;
+  }
 }
 
 #progressBar div {
@@ -62,6 +78,15 @@ li {
   text-align: right;
   line-height: 22px; /* same as #progressBar height if we want text middle aligned */
   width: 0;
-  background-color: #d05656;
+  background-color: var(--contrast-tertiary);
   box-sizing: border-box;
+}
+
+#countdown {
+  display: flex;
+  gap: 20px;
+}
+
+#countdown > li > * {
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
 }

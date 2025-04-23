@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgFor} from '@angular/common';
+import {NgFor, NgOptimizedImage} from '@angular/common';
 import {LeaderboardComponent} from '../leaderboard/leaderboard.component';
 import {ShopPreviewComponent} from '../shop-preview/shop-preview.component';
 import {TimerComponent} from "../timer/timer.component";
@@ -21,7 +21,7 @@ interface ISessionInfo {
 
 @Component({
     selector: 'app-game',
-    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent, GamePointsModule, EffectLogComponent],
+    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent, GamePointsModule, EffectLogComponent, NgOptimizedImage],
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.css'],
 })

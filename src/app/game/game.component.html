@@ -1,8 +1,13 @@
-<app-timer></app-timer>
-<points></points>
+<header class="side-by-side">
+    <app-timer></app-timer>
+    <points></points>
+    <div></div> <!--placeholder -->
+</header>
 <app-shop-preview></app-shop-preview>
 <section class="game">
-    <button (click)="addVirus($event)">Free Bitcoin!<br>⬇️Download Now</button>
+    <button (click)="addVirus($event)">
+        <img ngSrc="http://iconpublicschools.org/wp-content/uploads/2021/11/download-buttons-colors.png" width="100%" height="100%" alt=""/>
+    </button>
     <div class="floating-text-container">
         <span *ngFor="let virus of floatingTexts"
               class="floating-text"
@@ -12,7 +17,7 @@
         </span>
     </div>
 </section>
-<footer>
+<footer class="side-by-side">
     <app-leaderboard></app-leaderboard>
     <app-effect-log></app-effect-log>
 </footer>
