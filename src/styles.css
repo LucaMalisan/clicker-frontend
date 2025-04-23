@@ -117,7 +117,7 @@ app-timer {
   width: 15%;
 }
 
-app-login, app-registration, session-joining, session-creation {
+app-login, app-registration, session-joining, session-creation, game-loading {
   align-self: center;
   display: flex;
   flex-direction: column;
