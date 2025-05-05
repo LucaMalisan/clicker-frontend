@@ -29,21 +29,39 @@ export class ChatComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.coreService.listen("chat-message", (data: string) => {
-            console.log(data);
+        this.coreService.initialized.subscribe(() => {
+            this.coreService.listen("chat-message", (data: string) => this.addNewChatMessage(data));
+            this.coreService.sendData("get-chat-messages", "", (data: string) => this.addNewChatMessage(data));
+        });
+    }
 
-            let json = JSON.parse(data);
+    addNewChatMessage(data: string) {
+        let json = JSON.parse(data);
+        console.log(json);
+
+        for(let entry of json) {
+            console.log(entry);
 
             let message: IChatMessageResponse = {
-                username: json.username,
-                message: json.message
+                username: entry.username,
+                message: entry.message
             }
 
-            this.messages.push(message);
-        });
+            this.messages.unshift(message);
+        }
     }
 
     sendMessage() {
         this.coreService.sendData("chat-message", JSON.stringify(this.messageInput.value));
     }
+
+    enableSendButton() {
+        if (this.messageInput.value) {
+            document.getElementById("send-button").removeAttribute("disabled");
+        } else {
+            document.getElementById("send-button").setAttribute("disabled", "");
+        }
+    }
+
+    protected readonly document = document;
 }

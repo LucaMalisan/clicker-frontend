@@ -9,8 +9,8 @@
     </div>
 
     <div class="side-by-side" id="chat-input-container">
-        <input type="text" class="input-field" (keydown.enter)="sendMessage()" [formControl]="messageInput" placeholder="Type a message..."/>
-        <button id="send-button" (click)="sendMessage()">Send</button>
+        <input type="text" id="chat-input" class="input-field" (keydown.enter)="sendMessage()" [formControl]="messageInput" (change)="enableSendButton()" placeholder="Type a message..."/>
+        <button id="send-button" (click)="sendMessage()" disabled>Send</button>
     </div>
 </div>
   

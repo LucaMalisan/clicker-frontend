@@ -57,6 +57,10 @@ export class CoreService {
                 this.initialized.next(true);
             });
         });
+
+        document.addEventListener('beforeunload', () => {
+            this.sendData('player-offline', '');
+        })
     }
 
     sendData(event: string, data: string, handler = undefined) {
