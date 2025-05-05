@@ -48,7 +48,6 @@ export class CoreService {
                     this.router.navigate(['login'])
                 }
 
-                debugger
                 this.socket.io.opts.extraHeaders = {
                     cookie: `Authorization=${json.jwt}`
                 }
