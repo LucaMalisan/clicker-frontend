@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgFor} from '@angular/common';
+import {NgFor, NgOptimizedImage} from '@angular/common';
 import {LeaderboardComponent} from '../leaderboard/leaderboard.component';
 import {ShopPreviewComponent} from '../shop-preview/shop-preview.component';
 import {TimerComponent} from "../timer/timer.component";
@@ -7,6 +7,7 @@ import {CoreService} from "../core.service";
 import {Router} from "@angular/router";
 import {GamePointsModule} from "../game-points/game-points.module";
 import {EffectLogComponent} from "../effect-log/effect-log.component";
+import {ChatComponent} from "../chat/chat.component";
 
 interface FloatingText {
     x: number;
@@ -21,7 +22,7 @@ interface ISessionInfo {
 
 @Component({
     selector: 'app-game',
-    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent, GamePointsModule, EffectLogComponent],
+    imports: [NgFor, LeaderboardComponent, ShopPreviewComponent, TimerComponent, GamePointsModule, EffectLogComponent, NgOptimizedImage, ChatComponent],
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.css'],
 })

@@ -1,6 +1,15 @@
 h2, h3 {
   justify-self: center;
   margin-bottom: 40px;
+  color: white;
+}
+
+h2 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 24px;
 }
 
 div.tile {
@@ -23,6 +32,10 @@ div.tile {
       height: 24px;
     }
   }
+}
+
+h2, h3, .tile {
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
 }
 
 div.container {

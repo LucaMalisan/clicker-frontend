@@ -7,5 +7,10 @@
     margin-top: 20px;
     padding: 5px;
     border-radius: 10px;
+}
 
+.rank {
+    font-size: 18px;
+    color: #a64e4e;
+    font-family: "Comic Sans MS", serif;
 }

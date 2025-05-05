@@ -48,6 +48,10 @@ export class CoreService {
                     this.router.navigate(['login'])
                 }
 
+                this.socket.io.opts.extraHeaders = {
+                    cookie: `Authorization=${json.jwt}`
+                }
+
                 localStorage.setItem('jwt', json.jwt);
                 this.initialized.next(true);
             });

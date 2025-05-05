@@ -9,11 +9,11 @@ div.row {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 75vw;
+  width: 50vw;
   height: auto;
   margin: auto auto 20px;
   padding: 20px;
-  background-color: var(--secondary-background);
+  background-color: var(--contrast-tertiary);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border: 1px var(--border-color) solid;
@@ -38,6 +38,10 @@ div.row {
   border-radius: 10px;
   cursor: pointer;
   background: var(--secondary-button-gradient);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
 }
 
 .category-item[disabled] {
@@ -79,6 +83,14 @@ div.row {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  margin-bottom: 10px;
 }
   
 

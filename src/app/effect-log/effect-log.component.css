@@ -2,9 +2,22 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 15vw;
   background-color: var(--contrast-tertiary);
   margin-top: 20px;
   padding: 5px;
   border-radius: 10px;
+  width: fit-content;
+}
+
+h2 {
+  white-space: pre;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+li {
+  text-align: center;
 }

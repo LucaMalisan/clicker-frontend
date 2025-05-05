@@ -1,25 +1,25 @@
 :root {
   /* Primary Colors */
   --primary-button-gradient: linear-gradient(45deg, #ff0000, #ff8400);
-  --secondary-button-gradient: linear-gradient(45deg, #008f4c, #09ff8c);
+  --secondary-button-gradient: linear-gradient(45deg, #A64E4EFF, #ff8400);
 
 
   /* Neutral Colors */
   --background-gradient: linear-gradient(45deg, #6dbb73, #29ec39);
   --secondary-background: #f2a957;
-  --text-primary:   #483338; /* Main text #f0f5f0; */
-  --text-secondary: #B0B0B0;  /* Muted/descriptions */
-  --border-color: #303030;  /* Borders & dividers */
+  --text-primary: #483338; /* Main text #f0f5f0; */
+  --text-secondary: #B0B0B0; /* Muted/descriptions */
+  --border-color: #303030; /* Borders & dividers */
 
   /* Accent Colors */
-  --success-color: #00FF88;  /* Cyber Green */
-  --warning-color: #FFD700;  /* Alert Yellow */
-  --disabled-color: #773B00;  /* Dimmed Red-Orange */
+  --success-color: #00FF88; /* Cyber Green */
+  --warning-color: #FFD700; /* Alert Yellow */
+  --disabled-color: #773B00; /* Dimmed Red-Orange */
 
   /* Contrasting Colors for buffs / effects etc. */
   --contrast-primary: #9c4dcc;
-  --contrast-secondary: #ffd700;
-  --contrast-tertiary: #66ffcc;
+  --contrast-secondary: #5ec0b4;
+  --contrast-tertiary: #66efe4;
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -37,20 +37,34 @@ button {
   cursor: pointer;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
 }
 
 button:disabled {
   cursor: not-allowed;
 }
 
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+}
+
+footer {
+  justify-content: space-between;
+}
+
 /* Button hover effect */
 button:hover:not([disabled]) {
   transform: scale(1.1);
-  box-shadow: 0px 6px 15p
+  box-shadow: 0px 6px 15px
 }
 
 body {
-  background-image: var(--background-gradient);
+  /*background-image: var(--background-gradient);*/
+  background: repeating-conic-gradient(
+      from 0deg,
+      #1a5e37 0deg 10deg, /* Dunkleres Grün */ #2e7d32 10deg 20deg, /* Helles Grün */ #1a5e37 20deg 30deg /* Wieder dunkleres Grün */
+  );
 }
 
 h1, h2 {
@@ -78,4 +92,90 @@ h1, h2 {
   padding: 10px;
   margin: 0px 15px 25px 15px;
   font-size: 16px;
+}
+
+app-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 40px);
+  padding: 20px;
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
+}
+
+app-timer, points {
+  color: white;
+}
+
+points {
+  width: 100%;
+}
+
+app-timer {
+  text-align: center;
+  width: 15vw;
+}
+
+app-login, app-registration, session-joining, session-creation, game-loading {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  justify-content: flex-end;
+}
+
+app-game {
+  display: grid;
+}
+
+points {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+app-timer {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+app-chat {
+  grid-column: 1;
+  grid-row: 2 / 4;
+}
+
+app-shop-preview {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.game {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+app-leaderboard {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+app-effect-log {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+div.entry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 15px;
+  align-items: center;
+  background-color: var(--contrast-secondary);
 }
