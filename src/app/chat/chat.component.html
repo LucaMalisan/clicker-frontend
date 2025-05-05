@@ -1,11 +1,16 @@
 <div class="chat-container">
     <div class="messages">
         <div *ngFor="let msg of messages">
-            <strong>{{ msg.username }}:</strong> {{ msg.message }}
+            <div class="entry" id="chat-message">
+                <p> {{ msg.username }} </p>
+                <p> {{ msg.message }} </p>
+            </div>
         </div>
     </div>
 
-    <input type="text" class="input-field"(keydown.enter)="sendMessage()" [formControl]="messageInput" placeholder="Type a message..." />
-    <button (click)="sendMessage()">Send</button>
+    <div class="side-by-side" id="chat-input-container">
+        <input type="text" class="input-field" (keydown.enter)="sendMessage()" [formControl]="messageInput" placeholder="Type a message..."/>
+        <button id="send-button" (click)="sendMessage()">Send</button>
+    </div>
 </div>
   

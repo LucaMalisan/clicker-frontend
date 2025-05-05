@@ -1,0 +1,38 @@
+button#send-button {
+  padding: 10px;
+  font-size: 24px;
+  height: 50px;
+}
+
+div#chat-input-container {
+  align-self: flex-end;
+  height: 15%;
+}
+
+div#chat-input-container > input {
+  width: 60%;
+}
+
+.chat-container {
+  width: 15vw;
+  min-height: 60vh;
+  background-color: var(--contrast-tertiary);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+div#chat-message {
+  gap: 15%;
+  padding: 0 10px;
+}
+
+div.message {
+  max-height: 300px;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
