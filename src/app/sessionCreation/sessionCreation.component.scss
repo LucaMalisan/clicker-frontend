@@ -6,26 +6,6 @@ h2 {
   color: white;
 }
 
-div.tile {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  padding: 30px;
-  gap: 10px;
-  background-color: var(--contrast-tertiary);
-  border-radius: 30px;
-  justify-content: space-between;
-  font-family: "Comic Sans MS", Helvetica, sans-serif;
-  font-size: 18px;
-  height: 60%;
-
-  div.tile-row {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-  }
-}
-
 div.container {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -12,7 +12,10 @@ import {Router} from "@angular/router";
 })
 
 export class SessionJoiningComponent implements OnInit {
+
     public sessionKey: FormControl;
+    public errorMessage: string;
+
 
     constructor(private coreService: CoreService,
                 private router: Router) {
@@ -25,6 +28,8 @@ export class SessionJoiningComponent implements OnInit {
     }
 
     public joinSession() {
-        this.coreService.sendData('join-session', this.sessionKey.value);
+        this.coreService.sendData('join-session', this.sessionKey.value, (response: string) => {
+            this.errorMessage = response;
+        });
     }
 }

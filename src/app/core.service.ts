@@ -46,6 +46,7 @@ export class CoreService {
 
                 if (!json.success) {
                     this.router.navigate(['login'])
+                    return;
                 }
 
                 this.socket.io.opts.extraHeaders = {

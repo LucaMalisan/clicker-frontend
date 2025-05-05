@@ -32,8 +32,12 @@ export class GameLoadingComponent implements OnInit {
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
             this.coreService.sendData('get-session-info', '', (response: string) => {
-                console.log(`Received response ${response}`)
                 let json: ISessionInfo = JSON.parse(response);
+
+                if (!json.sessionKey) {
+                    this.router.navigate(["session-joining"])
+                }
+
                 this.joinedPlayers = json.joinedPlayers;
                 this.sessionKey = json.sessionKey;
                 this.admin = json.admin;

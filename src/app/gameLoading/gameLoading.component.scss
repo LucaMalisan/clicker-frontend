@@ -12,28 +12,6 @@ h3 {
   font-size: 24px;
 }
 
-div.tile {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  padding: 30px;
-  gap: 10px;
-  background-color: var(--contrast-tertiary);
-  border-radius: 30px;
-  justify-content: space-between;
-
-  div.tile-row {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
-}
-
 h2, h3, .tile {
   font-family: "Comic Sans MS", Helvetica, sans-serif;
 }
