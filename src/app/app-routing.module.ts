@@ -10,14 +10,13 @@ import {GameLoadingComponent} from "./gameLoading/gameLoading.component";
 import {GameComponent} from "./game/game.component";
 
 const routes: Routes = [
-    {path: '', component: AppComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'chat', component: ChatComponent},
     {path: 'session-creation', component: SessionCreationComponent},
     {path: 'session-joining', component: SessionJoiningComponent},
     {path: 'game-loading', component: GameLoadingComponent},
-    {path: 'game', component: GameComponent}
+    {path: 'game', component: GameComponent},
+    {path: '*', redirectTo: 'session-joining', pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -1,4 +1,3 @@
-import {NgFor} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 
@@ -9,7 +8,7 @@ interface ILeaderBoardEntry {
 
 @Component({
     selector: 'app-leaderboard',
-    imports: [NgFor],
+    imports: [],
     templateUrl: './leaderboard.component.html',
     styleUrl: './leaderboard.component.css'
 })

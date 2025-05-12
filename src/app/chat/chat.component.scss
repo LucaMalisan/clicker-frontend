@@ -29,9 +29,9 @@ div#chat-message {
   padding: 0 10px;
 }
 
-div.message {
-  max-height: 300px;
-  overflow-y: hidden;
+div.messages {
+  max-height: 50vh;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 5px;

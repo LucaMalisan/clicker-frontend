@@ -46,6 +46,7 @@ export class CoreService {
 
                 if (!json.success) {
                     this.router.navigate(['login'])
+                    return;
                 }
 
                 this.socket.io.opts.extraHeaders = {
@@ -56,6 +57,10 @@ export class CoreService {
                 this.initialized.next(true);
             });
         });
+
+        document.addEventListener('beforeunload', () => {
+            this.sendData('player-offline', '');
+        })
     }
 
     sendData(event: string, data: string, handler = undefined) {

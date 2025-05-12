@@ -25,7 +25,8 @@
 /* You can add global styles to this file, and also import other style files */
 p.error {
   color: red;
-  max-width: 300px;
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
+  font-size: 24px;
 }
 
 button {
@@ -178,4 +179,29 @@ div.entry {
   padding: 15px;
   align-items: center;
   background-color: var(--contrast-secondary);
+}
+
+div.tile {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 30px;
+  gap: 10px;
+  background-color: var(--contrast-tertiary);
+  border-radius: 30px;
+  justify-content: space-between;
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
+  font-size: 18px;
+  height: fit-content;
+}
+
+div.tile-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+div.tile-row > svg {
+  width: 24px;
+  height: 24px;
 }
