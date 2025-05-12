@@ -40,6 +40,10 @@ export class ShopPreviewComponent implements OnInit {
                     this.coreService.listen("reactivate-effect", (effectName: string) => {
                         this.setEffectDisabled(effectName, false)
                     });
+
+                    this.coreService.listen("show-popup", () => {
+                        alert("!!!YOUR PC IS INFECTED BY 934944534458394 VIRUSES!!!")
+                    });
                 }
         );
     }
