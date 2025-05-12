@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
     selector: 'session-joining',
     templateUrl: './sessionJoining.component.html',
     standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, RouterLink],
     styleUrls: ['./sessionJoining.component.scss']
 })
 
