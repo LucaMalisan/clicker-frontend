@@ -40,6 +40,8 @@ export class GameLoadingComponent implements OnInit {
 
                 this.joinedPlayers = json.joinedPlayers;
                 this.sessionKey = json.sessionKey;
+
+                localStorage.setItem("session-key", json.sessionKey)
                 this.admin = json.admin;
             });
 

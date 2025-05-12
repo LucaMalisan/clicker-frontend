@@ -30,8 +30,8 @@ div#chat-message {
 }
 
 div.messages {
-  max-height: 50vh;
-  overflow-y: scroll;
+  height: 48vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 5px;

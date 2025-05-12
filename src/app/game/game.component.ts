@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {NgFor, NgOptimizedImage} from '@angular/common';
 import {LeaderboardComponent} from '../leaderboard/leaderboard.component';
 import {ShopPreviewComponent} from '../shop-preview/shop-preview.component';
@@ -53,7 +53,7 @@ export class GameComponent implements OnInit {
                     this.newButtonClicks = 0;
                 }
             }, 250);
-        })
+        });
     }
 
     addVirus(event: MouseEvent) {
@@ -73,5 +73,10 @@ export class GameComponent implements OnInit {
         setTimeout(() => {
             this.floatingTexts.shift();
         }, 2000);
+    }
+
+    @HostListener('window:beforeunload', ['$event'])
+    notifyPlayerOffline() {
+        this.coreService.sendData('player-offline', localStorage.getItem("session-key"));
     }
 }

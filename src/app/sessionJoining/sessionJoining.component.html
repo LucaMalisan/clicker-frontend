@@ -6,7 +6,7 @@
             <label> Enter session key </label> <br>
             <input type="text" class="input-field" [formControl]="sessionKey"/>
         </div>
-        <button type="submit" (click)="joinSession()"> Join </button>
+        <button type="submit" (click)="joinSession()"> Join</button>
         <p class="error"> {{ errorMessage }}</p>
     </div>
     <div class="tile">
@@ -19,3 +19,4 @@
         </ul>
     </div>
 </div>
+<a [routerLink]="['/session-creation/']"> Create a session </a>

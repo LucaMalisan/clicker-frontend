@@ -49,18 +49,13 @@ export class CoreService {
                     return;
                 }
 
-                this.socket.io.opts.extraHeaders = {
-                    cookie: `Authorization=${json.jwt}`
-                }
-
                 localStorage.setItem('jwt', json.jwt);
-                this.initialized.next(true);
+
+                this.sendData('player-online', localStorage.getItem("session-key"), () => {
+                    this.initialized.next(true);
+                });
             });
         });
-
-        document.addEventListener('beforeunload', () => {
-            this.sendData('player-offline', '');
-        })
     }
 
     sendData(event: string, data: string, handler = undefined) {

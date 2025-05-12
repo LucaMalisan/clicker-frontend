@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
@@ -19,7 +19,7 @@ interface IChatMessageResponse {
     styleUrls: ['./chat.component.scss']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit {
 
     public messages: IChatMessageResponse[] = [];
     public messageInput: FormControl;
@@ -28,10 +28,15 @@ export class ChatComponent implements OnInit {
         this.messageInput = new FormControl('');
     }
 
+    ngAfterViewInit(): void {
+        this.coreService.initialized.subscribe(() => {
+            this.coreService.sendData("get-chat-messages", "", (data: string) => this.addNewChatMessage(data));
+        });
+    }
+
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
             this.coreService.listen("chat-message", (data: string) => this.addNewChatMessage(data));
-            this.coreService.sendData("get-chat-messages", "", (data: string) => this.addNewChatMessage(data));
         });
     }
 
@@ -39,7 +44,7 @@ export class ChatComponent implements OnInit {
         let json = JSON.parse(data);
         console.log(json);
 
-        for(let entry of json) {
+        for (let entry of json) {
             console.log(entry);
 
             let message: IChatMessageResponse = {

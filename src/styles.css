@@ -127,6 +127,10 @@ app-login, app-registration, session-joining, session-creation, game-loading {
   height: 100vh;
 }
 
+session-joining, session-creation {
+  gap: 60px;
+}
+
 header {
   justify-content: flex-end;
 }
@@ -204,4 +208,10 @@ div.tile-row {
 div.tile-row > svg {
   width: 24px;
   height: 24px;
+}
+
+a {
+  font-size: 24px;
+  color: white;
+  font-family: "Comic Sans MS", serif;
 }
