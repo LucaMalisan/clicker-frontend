@@ -77,6 +77,6 @@ export class GameComponent implements OnInit {
 
     @HostListener('window:beforeunload', ['$event'])
     notifyPlayerOffline() {
-        this.coreService.sendData('player-offline', '');
+        this.coreService.sendData('player-offline', localStorage.getItem("session-key"));
     }
 }
