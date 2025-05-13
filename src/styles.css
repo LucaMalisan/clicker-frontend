@@ -96,12 +96,11 @@ h1, h2 {
 }
 
 app-game {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   height: calc(100vh - 40px);
   padding: 20px;
   font-family: "Comic Sans MS", Helvetica, sans-serif;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
 }
 
 app-timer, points {
@@ -133,10 +132,6 @@ session-joining, session-creation {
 
 header {
   justify-content: flex-end;
-}
-
-app-game {
-  display: grid;
 }
 
 points {
@@ -188,7 +183,6 @@ div.entry {
 div.tile {
   display: flex;
   flex-direction: column;
-  width: fit-content;
   padding: 30px;
   gap: 10px;
   background-color: var(--contrast-tertiary);
@@ -197,6 +191,7 @@ div.tile {
   font-family: "Comic Sans MS", Helvetica, sans-serif;
   font-size: 18px;
   height: fit-content;
+  width: 25vw;
 }
 
 div.tile-row {
@@ -208,6 +203,10 @@ div.tile-row {
 div.tile-row > svg {
   width: 24px;
   height: 24px;
+}
+
+div.container {
+  width: 100%;
 }
 
 a {
