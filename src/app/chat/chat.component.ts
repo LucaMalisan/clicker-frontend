@@ -8,6 +8,11 @@ interface IChatMessageResponse {
     message: string;
 }
 
+interface IChatMessage {
+    value: string;
+    sessionKey: string;
+}
+
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
@@ -30,7 +35,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.sendData("get-chat-messages", "", (data: string) => this.addNewChatMessage(data));
+            this.coreService.sendData("get-chat-messages", localStorage.getItem("session-key"), (data: string) => this.addNewChatMessage(data));
         });
     }
 
@@ -49,7 +54,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
             let message: IChatMessageResponse = {
                 username: entry.username,
-                message: entry.message
+                message: entry.message,
             }
 
             this.messages.unshift(message);
@@ -57,7 +62,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
 
     sendMessage() {
-        this.coreService.sendData("chat-message", JSON.stringify(this.messageInput.value));
+        let requestDTO: IChatMessage = {
+            value: this.messageInput.value,
+            sessionKey: localStorage.getItem("session-key")
+        }
+
+        this.coreService.sendData("chat-message", JSON.stringify(requestDTO));
     }
 
     enableSendButton() {

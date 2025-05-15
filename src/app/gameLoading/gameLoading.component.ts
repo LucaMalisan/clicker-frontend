@@ -31,7 +31,7 @@ export class GameLoadingComponent implements OnInit {
 
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.sendData('get-session-info', '', (response: string) => {
+            this.coreService.sendData('get-session-info', localStorage.getItem("session-key"), (response: string) => {
                 let json: ISessionInfo = JSON.parse(response);
 
                 if (!json.sessionKey) {
@@ -40,16 +40,13 @@ export class GameLoadingComponent implements OnInit {
 
                 this.joinedPlayers = json.joinedPlayers;
                 this.sessionKey = json.sessionKey;
-
-                localStorage.setItem("session-key", json.sessionKey)
                 this.admin = json.admin;
             });
 
             this.coreService.listen("start-game", () => this.router.navigate(["game"]));
 
-            this.coreService.listen('player-joined', (player: string) => {
-                console.log(player);
-                this.joinedPlayers.push(player)
+            this.coreService.listen('player-joined', (players: string) => {
+                this.joinedPlayers = JSON.parse(players);
             });
         });
     }
