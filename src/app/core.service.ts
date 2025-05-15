@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {HostListener, Injectable, OnInit} from '@angular/core';
 import {DefaultEventsMap} from '@socket.io/component-emitter';
 import {io, Socket} from "socket.io-client";
 import {Router} from "@angular/router";

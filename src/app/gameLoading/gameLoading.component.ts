@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
@@ -24,7 +24,7 @@ export class GameLoadingComponent implements OnInit {
     public joinedPlayers: string[] = [];
     public admin: boolean;
 
-    constructor(private coreService: CoreService,
+    constructor(protected coreService: CoreService,
                 private router: Router) {
         //TODO
     }
@@ -47,14 +47,17 @@ export class GameLoadingComponent implements OnInit {
 
             this.coreService.listen("start-game", () => this.router.navigate(["game"]));
 
-            setTimeout(() =>
-                    //TODO use some sort of replay-method on server that just sends message to all other clients
-                    document.getElementById("start-game").addEventListener("click", () => this.coreService.sendData("start-game", "")), 500);
+            this.coreService.listen('player-joined', (player: string) => {
+                console.log(player);
+                this.joinedPlayers.push(player)
+            });
         });
-
-        this.coreService.listen('player-joined', (player: string) => {
-            console.log(player);
-            this.joinedPlayers.push(player)
-        })
     }
+
+    @HostListener('window:beforeunload', ['$event'])
+    notifyPlayerOffline() {
+        this.coreService.sendData('player-offline', localStorage.getItem("session-key"));
+    }
+
+    protected readonly localStorage = localStorage;
 }

@@ -18,8 +18,8 @@ export class TimerComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.sendData("ready-for-game-start", "");
-            this.coreService.listen("start-timer", (duration: string) => this.startTimer(parseInt(duration)));
+            this.coreService.sendData("get-remaining-duration", localStorage.getItem("session-key"),
+                    (duration: string) => this.startTimer(parseInt(duration)));
             this.coreService.listen("stop-session", () => {
                 console.log("stop-session");
                 clearInterval(this.intervalId);
