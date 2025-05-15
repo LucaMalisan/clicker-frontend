@@ -23,8 +23,10 @@ export class SessionJoiningComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.coreService.listen('join-successful', () =>
-                this.router.navigate(['game-loading']));
+        this.coreService.listen('join-successful', () => {
+            localStorage.setItem("session-key", this.sessionKey.value);
+            this.router.navigate(['game-loading']);
+        });
     }
 
     public joinSession() {
