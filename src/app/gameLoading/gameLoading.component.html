@@ -15,3 +15,6 @@
 @if (admin) {
     <button type="button" id="start-game" (click)="this.coreService.sendData('ready-for-game-start', localStorage.getItem('session-key'));"> Start Game</button>
 }
+
+<br>
+<a [routerLink]="['/session-joining/']"> Cancel </a>

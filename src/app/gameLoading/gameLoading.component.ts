@@ -2,7 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 interface ISessionInfo {
     sessionKey: string,
@@ -14,7 +14,7 @@ interface ISessionInfo {
     selector: 'game-loading',
     templateUrl: './gameLoading.component.html',
     standalone: true,
-    imports: [ReactiveFormsModule, NgForOf],
+    imports: [ReactiveFormsModule, NgForOf, RouterLink],
     styleUrls: ['./gameLoading.component.scss']
 })
 
@@ -25,9 +25,7 @@ export class GameLoadingComponent implements OnInit {
     public admin: boolean;
 
     constructor(protected coreService: CoreService,
-                private router: Router) {
-        //TODO
-    }
+                private router: Router) {}
 
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
