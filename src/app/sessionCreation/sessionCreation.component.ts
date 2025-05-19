@@ -27,8 +27,10 @@ export class SessionCreationComponent implements OnInit {
             this.coreService.sendData('join-session', sessionKey);
         })
 
-        this.coreService.listen('join-successful', () =>
-                this.router.navigate(['game-loading']));
+        this.coreService.listen('join-successful', () => {
+                    this.router.navigate(['game-loading']);
+                }
+        );
     }
 
     public createSession() {

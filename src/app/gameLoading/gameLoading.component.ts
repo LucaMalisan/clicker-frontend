@@ -6,6 +6,7 @@ import {Router, RouterLink} from "@angular/router";
 
 interface ISessionInfo {
     sessionKey: string,
+    started: boolean,
     joinedPlayers: string[]
     admin: boolean
 }
@@ -25,7 +26,8 @@ export class GameLoadingComponent implements OnInit {
     public admin: boolean;
 
     constructor(protected coreService: CoreService,
-                private router: Router) {}
+                private router: Router) {
+    }
 
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
@@ -34,6 +36,10 @@ export class GameLoadingComponent implements OnInit {
 
                 if (!json.sessionKey) {
                     this.router.navigate(["session-joining"])
+                }
+
+                if (json.started) {
+                    this.router.navigate(["game"]);
                 }
 
                 this.joinedPlayers = json.joinedPlayers;
