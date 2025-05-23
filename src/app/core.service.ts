@@ -14,6 +14,13 @@ interface Response {
     jwt: string
 }
 
+interface ISessionInfo {
+    sessionKey: string,
+    started: boolean,
+    joinedPlayers: string[]
+    admin: boolean
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -24,6 +31,7 @@ export class CoreService {
     public socket: Socket<DefaultEventsMap, DefaultEventsMap>;
     public initialized: Subject<Boolean> = new ReplaySubject();
     public points: number = 0;
+    public protectedPages = ["/game", "/game-loading", "/end-leaderboard"];
 
     constructor(private router: Router) {
         this.socket = io(this.url, {
@@ -54,6 +62,24 @@ export class CoreService {
                 this.sendData('player-online', localStorage.getItem("session-key"), () => {
                     this.initialized.next(true);
                 });
+
+                if (this.protectedPages.includes(location.pathname)) {
+                    this.sendData('get-session-info', localStorage.getItem("session-key"), async (response: string) => {
+                        let json: ISessionInfo = JSON.parse(response);
+
+                        if (!json.sessionKey) {
+                            this.router.navigate(["session-joining"]);
+                            return;
+                        }
+
+                        if (json.started) {
+                            this.router.navigate(["game"]);
+                            return;
+                        }
+
+                        await this.router.navigate(["game-loading"]);
+                    });
+                }
             });
         });
     }

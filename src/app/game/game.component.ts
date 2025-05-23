@@ -38,18 +38,6 @@ export class GameComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.sendData("is-session-join-allowed", localStorage.getItem("session-key"), (isStarted: string) => {
-                console.log("is-started: " + isStarted)
-
-                if(!isStarted) {
-                    this.router.navigate(["session-joining"])
-                }
-
-                if (isStarted === 'false') {
-                    this.router.navigate(["game-loading"])
-                }
-            });
-
             setInterval(() => {
                 if (this.newButtonClicks > 0) {
                     this.coreService.sendData("handle-button-clicks", this.newButtonClicks + "");
