@@ -1,5 +1,5 @@
 <div id="effect-log">
-    <h2> Active Effects </h2>
+    <h3 class="black centered"> Active Effects </h3>
     <div *ngFor="let entry of userInfluencingEffects">
         <div class="entry">
             <div> {{ entry.effectName }}</div>
@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="divider"></div>
-    <h2> Effects influencing other players </h2>
+    <h3 class="black centered"> Effects influencing other players </h3>
     <div *ngFor="let entry of userActivatedEffects">
         <div class="entry">
             <div> {{ entry.effectName }}</div>
