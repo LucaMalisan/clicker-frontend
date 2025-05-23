@@ -33,15 +33,6 @@ export class GameLoadingComponent implements OnInit {
         this.coreService.initialized.subscribe(() => {
             this.coreService.sendData('get-session-info', localStorage.getItem("session-key"), (response: string) => {
                 let json: ISessionInfo = JSON.parse(response);
-
-                if (!json.sessionKey) {
-                    this.router.navigate(["session-joining"])
-                }
-
-                if (json.started) {
-                    this.router.navigate(["game"]);
-                }
-
                 this.joinedPlayers = json.joinedPlayers;
                 this.sessionKey = json.sessionKey;
                 this.admin = json.admin;
