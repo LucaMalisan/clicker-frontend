@@ -44,8 +44,7 @@ export class LoginComponent implements OnInit {
             let json: Tokens = JSON.parse(tokens);
             localStorage.setItem('jwt', json.jwt);
             localStorage.setItem('refresh-token', json.refreshToken);
-
-            this.router.navigate(['session-joining']);
+            location.href = "/session-joining";
         });
     }
 

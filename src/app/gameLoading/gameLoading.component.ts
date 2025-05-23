@@ -31,7 +31,11 @@ export class GameLoadingComponent implements OnInit {
 
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
+            console.log('try to get session info')
+
             this.coreService.sendData('get-session-info', localStorage.getItem("session-key"), (response: string) => {
+                console.log('get-session-info: ' + response);
+
                 let json: ISessionInfo = JSON.parse(response);
                 this.joinedPlayers = json.joinedPlayers;
                 this.sessionKey = json.sessionKey;

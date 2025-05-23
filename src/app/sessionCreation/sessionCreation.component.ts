@@ -28,7 +28,7 @@ export class SessionCreationComponent implements OnInit {
         })
 
         this.coreService.listen('join-successful', () => {
-                    this.router.navigate(['game-loading']);
+                    location.href = 'game-loading';
                 }
         );
     }
