@@ -25,7 +25,7 @@ export class SessionJoiningComponent implements OnInit {
     ngOnInit() {
         this.coreService.listen('join-successful', () => {
             if (this.sessionKey.value) {
-                localStorage.setItem("session-key", this.sessionKey.value);
+                sessionStorage.setItem("session-key", this.sessionKey.value);
             }
 
             location.href = 'game-loading';

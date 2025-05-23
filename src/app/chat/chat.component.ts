@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.sendData("get-chat-messages", localStorage.getItem("session-key"), (data: string) => this.addNewChatMessage(data));
+            this.coreService.sendData("get-chat-messages", sessionStorage.getItem("session-key"), (data: string) => this.addNewChatMessage(data));
         });
     }
 
@@ -64,7 +64,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     sendMessage() {
         let requestDTO: IChatMessage = {
             value: this.messageInput.value,
-            sessionKey: localStorage.getItem("session-key")
+            sessionKey: sessionStorage.getItem("session-key")
         }
 
         this.coreService.sendData("chat-message", JSON.stringify(requestDTO));

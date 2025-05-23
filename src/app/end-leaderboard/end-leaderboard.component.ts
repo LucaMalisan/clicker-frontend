@@ -32,7 +32,7 @@ export class EndLeaderboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
-            this.coreService.sendData("end-leaderboard", localStorage.getItem("session-key"), (leaderboard: string) => {
+            this.coreService.sendData("end-leaderboard", sessionStorage.getItem("session-key"), (leaderboard: string) => {
                 this.leaderboard = JSON.parse(leaderboard);
             });
         });
