@@ -2,3 +2,9 @@ div.entry {
   width: 60%;
   justify-self: center;
 }
+
+a {
+  display: block;
+  justify-self: center;
+  text-align: center;
+}
