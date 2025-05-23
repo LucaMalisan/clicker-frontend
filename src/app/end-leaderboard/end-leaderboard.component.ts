@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CoreService} from "../core.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 interface ILeaderBoardEntry {
     userName: string,
@@ -16,7 +16,9 @@ interface ISessionInfo {
 
 @Component({
     selector: 'app-end-leaderboard',
-    imports: [],
+    imports: [
+        RouterLink
+    ],
     templateUrl: './end-leaderboard.component.html',
     styleUrl: './end-leaderboard.component.css'
 })
