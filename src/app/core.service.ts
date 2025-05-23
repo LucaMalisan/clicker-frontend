@@ -3,6 +3,7 @@ import {DefaultEventsMap} from '@socket.io/component-emitter';
 import {io, Socket} from "socket.io-client";
 import {Router} from "@angular/router";
 import {ReplaySubject, Subject} from "rxjs";
+import {environment} from "../environments/environment";
 
 interface Tokens {
     jwt: string,
@@ -26,15 +27,13 @@ interface ISessionInfo {
 })
 export class CoreService {
 
-    //TODO env variable
-    public url = 'http://localhost:3000';
     public socket: Socket<DefaultEventsMap, DefaultEventsMap>;
     public initialized: Subject<Boolean> = new ReplaySubject();
     public points: number = 0;
     public protectedPages = ["/game", "/game-loading", "/end-leaderboard"];
 
     constructor(private router: Router) {
-        this.socket = io(this.url, {
+        this.socket = io(environment.API_URL, {
             reconnection: false
         });
 
