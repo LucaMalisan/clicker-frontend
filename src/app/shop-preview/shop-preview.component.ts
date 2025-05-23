@@ -55,7 +55,7 @@ export class ShopPreviewComponent implements OnInit {
             this.setEffectDisabled(effect.name, true)
             this.coreService.points -= parseInt(effect.cost);
 
-            this.coreService.sendData(effect.route, localStorage.getItem("session-key"), (updatedEffects: string) => {
+            this.coreService.sendData(effect.route, sessionStorage.getItem("session-key"), (updatedEffects: string) => {
                 let disabled = effect.disabled;
                 this.effects = JSON.parse(updatedEffects);
                 this.setEffectDisabled(effect.name, disabled) //keep disabled status

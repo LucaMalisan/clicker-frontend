@@ -39,8 +39,8 @@ export class CoreService {
 
         this.socket.on('connect', () => {
             console.log("connection attempt started")
-            let jwt = localStorage.getItem('jwt');
-            let refreshToken = localStorage.getItem('refresh-token');
+            let jwt = sessionStorage.getItem('jwt');
+            let refreshToken = sessionStorage.getItem('refresh-token');
             let tokens: Tokens = {
                 jwt: jwt,
                 refreshToken: refreshToken
@@ -56,14 +56,14 @@ export class CoreService {
                     return;
                 }
 
-                localStorage.setItem('jwt', json.jwt);
+                sessionStorage.setItem('jwt', json.jwt);
 
-                this.sendData('player-online', localStorage.getItem("session-key"), () => {
+                this.sendData('player-online', sessionStorage.getItem("session-key"), () => {
                     this.initialized.next(true);
                 });
 
                 if (this.protectedPages.includes(location.pathname)) {
-                    this.sendData('get-session-info', localStorage.getItem("session-key"), async (response: string) => {
+                    this.sendData('get-session-info', sessionStorage.getItem("session-key"), async (response: string) => {
                         let json: ISessionInfo = JSON.parse(response);
 
                         if (!json.sessionKey) {

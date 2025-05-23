@@ -23,7 +23,7 @@ export class SessionCreationComponent implements OnInit {
 
     ngOnInit() {
         this.coreService.listen('session-creation-successful', (sessionKey) => {
-            localStorage.setItem("session-key", sessionKey);
+            sessionStorage.setItem("session-key", sessionKey);
             this.coreService.sendData('join-session', sessionKey);
         })
 
