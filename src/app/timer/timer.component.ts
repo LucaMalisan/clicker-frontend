@@ -23,8 +23,8 @@ export class TimerComponent implements OnInit {
             this.coreService.listen("stop-session", () => {
                 console.log("stop-session");
                 clearInterval(this.intervalId);
-                this.router.navigate(["session-joining"])
-            })
+                this.router.navigate(["end-leaderboard"])
+            });
         });
     }
 

@@ -188,7 +188,6 @@ div.tile {
   background-color: var(--contrast-tertiary);
   border-radius: 30px;
   justify-content: space-between;
-  font-family: "Comic Sans MS", Helvetica, sans-serif;
   font-size: 18px;
   height: fit-content;
   width: 25vw;
@@ -213,4 +212,13 @@ a {
   font-size: 24px;
   color: white;
   font-family: "Comic Sans MS", serif;
+}
+
+h1, h2, h3, .tile, .entry {
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 48px;
+  color: white;
 }

@@ -1,0 +1,10 @@
+<section class="leaderboard">
+    <h2>End-Leaderboard</h2>
+    @for (entry of leaderboard; track entry; let i = $index) {
+        <div class="entry">
+            <div> {{ entry.userName }}</div>
+            <div> {{ entry.points }} Punkte</div>
+            <div class="rank"> #{{ i+1 }}</div>
+        </div>
+    }
+</section>
