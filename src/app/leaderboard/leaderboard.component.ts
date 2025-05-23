@@ -15,7 +15,7 @@ interface ILeaderBoardEntry {
 
 export class LeaderboardComponent implements OnInit {
 
-    protected leaderboard: ILeaderBoardEntry[];
+    protected leaderboard: ILeaderBoardEntry[] = [];
 
     constructor(protected coreService: CoreService) {
     }

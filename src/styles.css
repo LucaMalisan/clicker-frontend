@@ -222,3 +222,15 @@ h2 {
   font-size: 48px;
   color: white;
 }
+
+h3 {
+  font-size: 22px;
+}
+
+.black {
+  color: black;
+}
+
+.centered {
+  text-align: center;
+}
