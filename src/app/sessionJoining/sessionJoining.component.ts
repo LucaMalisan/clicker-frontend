@@ -28,7 +28,7 @@ export class SessionJoiningComponent implements OnInit {
                 localStorage.setItem("session-key", this.sessionKey.value);
             }
 
-            this.router.navigate(['game-loading']);
+            location.href = 'game-loading';
         });
     }
 
