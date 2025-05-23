@@ -1,0 +1,6 @@
+services:
+  client:
+    build:
+      context: .
+    ports:
+      - "4202:4200"
