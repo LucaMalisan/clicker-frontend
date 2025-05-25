@@ -13,6 +13,10 @@ interface Tokens {
     refreshToken: string
 }
 
+/**
+ * This class handles the login functionality.
+ */
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -26,13 +30,14 @@ interface Tokens {
 
 export class LoginComponent implements OnInit {
 
+    // references to userName and password input
     public userName: FormControl;
     public password: FormControl;
+
+    //cache for response message of server
     public errorMessage: string;
 
-    constructor(
-            private coreService: CoreService,
-            private router: Router) {
+    constructor(private coreService: CoreService) {
         this.userName = new FormControl('');
         this.password = new FormControl('');
     }

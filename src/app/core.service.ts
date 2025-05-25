@@ -22,6 +22,11 @@ interface ISessionInfo {
     admin: boolean
 }
 
+/**
+ * This class provides methods with commonly used logic
+ * Additionally, it acts as a request filter that redirects to other pages if necessary
+ */
+
 @Injectable({
     providedIn: 'root'
 })
@@ -33,6 +38,8 @@ export class CoreService {
     public protectedPages = ["/game", "/game-loading", "/end-leaderboard"];
 
     constructor(private router: Router) {
+
+        // socket io initialization
         this.socket = io(environment.API_URL, {
             reconnection: false
         });
@@ -46,49 +53,60 @@ export class CoreService {
                 refreshToken: refreshToken
             }
 
+            // register client at server
             this.sendData('register', JSON.stringify(tokens), (response: string) => {
                 let json: Response = JSON.parse(response);
 
                 console.log("JWT token is valid: " + json.success)
 
+                // user is not (correctly) authenticated and has no permission to access page, redirect to login
                 if (!json.success) {
                     this.router.navigate(['login'])
                     return;
                 }
 
+                // jwt might have been refreshed, set it to sessionStorage
                 sessionStorage.setItem('jwt', json.jwt);
 
-                this.sendData('player-online', sessionStorage.getItem("session-key"), () => {
-                    this.initialized.next(true);
-                });
+                // inform that client is online
+                this.sendData('player-online', sessionStorage.getItem("session-key"));
 
+                // filter request - redirect to according page if necessary
                 if (this.protectedPages.includes(location.pathname)) {
                     this.sendData('get-session-info', sessionStorage.getItem("session-key"), async (response: string) => {
                         let json: ISessionInfo = JSON.parse(response);
 
+                        // user isn't assigned to any session, redirect to session join
                         if (!json.sessionKey) {
                             this.router.navigate(["session-joining"]);
                             return;
                         }
 
+                        // game has already started, redirect to game screen
                         if (json.started) {
                             this.router.navigate(["game"]);
                             return;
                         }
 
+                        // user is assigned to game but it didn't start - redirect to game-loading
                         await this.router.navigate(["game-loading"]);
                     });
                 }
+
+                // indicate to component classes that initialization is done
+                this.initialized.next(true);
             });
         });
     }
 
+    // send event with data, handle response
     sendData(event: string, data: string, handler = undefined) {
         handler = handler ? handler : () => {
         };
         this.socket.emit(event, data, handler);
     }
 
+    // listen to event and handle it
     listen(event: string, handler: (data: any) => void) {
         this.stopListen(event);
         this.socket.on(event, handler);

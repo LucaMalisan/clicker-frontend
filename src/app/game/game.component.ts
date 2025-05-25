@@ -15,11 +15,9 @@ interface FloatingText {
     y: number;
 }
 
-interface ISessionInfo {
-    sessionKey: string,
-    joinedPlayers: any[]
-    admin: boolean
-}
+/**
+ * This class handles the main game functionality.
+ */
 
 @Component({
     selector: 'app-game',
@@ -29,16 +27,22 @@ interface ISessionInfo {
 })
 export class GameComponent implements OnInit {
 
+    // client-side cache for button clicks
     public newButtonClicks: number = 0;
+
+    // array for the "+virus" animation
     public floatingTexts: FloatingText[] = [];
+
+    // how many virus are gained per button click
     public virusAmountGained: number = 1;
 
-    constructor(private coreService: CoreService,
-                private router: Router) {
+    constructor(private coreService: CoreService) {
     }
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
+
+            //send collected button clicks each 250 ms and clear cache
             setInterval(() => {
                 if (this.newButtonClicks > 0) {
                     this.coreService.sendData("handle-button-clicks", this.newButtonClicks + "");
@@ -48,6 +52,10 @@ export class GameComponent implements OnInit {
         });
     }
 
+    /**
+     * Handle button click
+     * @param event
+     */
     addVirus(event: MouseEvent) {
         this.newButtonClicks++;
 
@@ -67,6 +75,9 @@ export class GameComponent implements OnInit {
         }, 2000);
     }
 
+    /**
+     * Notify server that player is offline.
+     */
     @HostListener('window:beforeunload', ['$event'])
     notifyPlayerOffline() {
         this.coreService.sendData('player-offline', sessionStorage.getItem("session-key"));

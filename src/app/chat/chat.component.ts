@@ -13,6 +13,11 @@ interface IChatMessage {
     sessionKey: string;
 }
 
+/**
+ * This class handles the chat functionality.
+ *
+ */
+
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
@@ -23,10 +28,12 @@ interface IChatMessage {
     ],
     styleUrls: ['./chat.component.scss']
 })
-
 export class ChatComponent implements OnInit, AfterViewInit {
 
+    // frontend-cache for all messages
     public messages: IChatMessageResponse[] = [];
+
+    // reference to chat message input
     public messageInput: FormControl;
 
     constructor(private coreService: CoreService) {
@@ -35,28 +42,27 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.coreService.initialized.subscribe(() => {
+            // populate chat window with all that messages
             this.coreService.sendData("get-chat-messages", sessionStorage.getItem("session-key"), (data: string) => this.addNewChatMessage(data));
         });
     }
 
     ngOnInit() {
         this.coreService.initialized.subscribe(() => {
+            // listen for new messages
             this.coreService.listen("chat-message", (data: string) => this.addNewChatMessage(data));
         });
     }
 
     addNewChatMessage(data: string) {
         let json = JSON.parse(data);
-        console.log(json);
 
         for (let entry of json) {
-            console.log(entry);
-
             let message: IChatMessageResponse = {
                 username: entry.username,
                 message: entry.message,
             }
-
+             // put new message at the top of the list
             this.messages.unshift(message);
         }
     }
@@ -67,9 +73,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
             sessionKey: sessionStorage.getItem("session-key")
         }
 
+        // send new chat message to the server
         this.coreService.sendData("chat-message", JSON.stringify(requestDTO));
     }
 
+    /**
+     * Enables the send button if the message input is not empty.
+     */
     enableSendButton() {
         if (this.messageInput.value) {
             document.getElementById("send-button").removeAttribute("disabled");

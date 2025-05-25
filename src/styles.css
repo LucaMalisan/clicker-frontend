@@ -1,3 +1,7 @@
+/**
+This files defines the global styles to reduce code duplication
+ */
+
 :root {
   /* Primary Colors */
   --primary-button-gradient: linear-gradient(45deg, #ff0000, #ff8400);

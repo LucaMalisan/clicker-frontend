@@ -7,12 +7,9 @@ interface ILeaderBoardEntry {
     points: number
 }
 
-interface ISessionInfo {
-    sessionKey: string,
-    started: boolean,
-    joinedPlayers: string[]
-    admin: boolean
-}
+/**
+ * This class handles the end leaderboard functionality.
+ */
 
 @Component({
     selector: 'app-end-leaderboard',
@@ -32,6 +29,7 @@ export class EndLeaderboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
+            // get end leaderboard from server
             this.coreService.sendData("end-leaderboard", sessionStorage.getItem("session-key"), (leaderboard: string) => {
                 this.leaderboard = JSON.parse(leaderboard);
             });

@@ -7,6 +7,10 @@ interface IActiveEffect {
     userName: string,
 }
 
+/**
+ * This class handles the effect log functionality.
+ */
+
 @Component({
     selector: 'app-effect-log',
     imports: [
@@ -25,10 +29,13 @@ export class EffectLogComponent implements OnInit {
 
     ngOnInit(): void {
         this.coreService.initialized.subscribe(() => {
+
+            // effects that influence user
             this.coreService.listen("get-user-influencing-effects", (json: string) => {
                 this.userInfluencingEffects = JSON.parse(json);
             });
 
+            // effects that user has activated
             this.coreService.listen("get-user-activated-effects", (json: string) => {
                 this.userActivatedEffects = JSON.parse(json);
             });

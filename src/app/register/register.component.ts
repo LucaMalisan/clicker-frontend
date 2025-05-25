@@ -9,6 +9,10 @@ interface RegistrationInfo {
     password: string;
 }
 
+/**
+ * This class handles the register functionality.
+ */
+
 @Component({
     selector: 'app-registration',
     templateUrl: './register.component.html',
@@ -22,13 +26,15 @@ interface RegistrationInfo {
 
 export class RegisterComponent implements OnInit {
 
+    //references to username and password input fields
     public userName: FormControl;
     public password: FormControl;
+
+    //cache for response message of server
     public responseMessage: string;
 
-    constructor(
-            private coreService: CoreService,
-            private router: Router) {
+    constructor(private coreService: CoreService,
+                private router: Router) {
         this.userName = new FormControl('');
         this.password = new FormControl('');
     }
@@ -36,8 +42,9 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
         this.coreService.listen('registration-successful', () => {
             console.log("Registration successful");
+
+            //user is successfuly created, user can now login
             this.router.navigate(['login'])
-            .then(response => console.log(`Redirect to login : ${response}`));
         });
     }
 
@@ -50,6 +57,7 @@ export class RegisterComponent implements OnInit {
             password: this.password.value
         }
 
+        //inform the server to create a new user with the given payload
         this.coreService.sendData("register-user",
                 JSON.stringify(registrationInfo),
                 (response: string) => this.responseMessage = response);

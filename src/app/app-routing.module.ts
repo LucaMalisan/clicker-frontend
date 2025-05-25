@@ -8,6 +8,10 @@ import {GameLoadingComponent} from "./gameLoading/gameLoading.component";
 import {GameComponent} from "./game/game.component";
 import {EndLeaderboardComponent} from "./end-leaderboard/end-leaderboard.component";
 
+/**
+ * This class assigns url paths to the different pages
+ */
+
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},

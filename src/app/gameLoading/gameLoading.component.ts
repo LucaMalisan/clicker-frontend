@@ -11,6 +11,10 @@ interface ISessionInfo {
     admin: boolean
 }
 
+/**
+ * This class handles the game loading screen.
+ */
+
 @Component({
     selector: 'game-loading',
     templateUrl: './gameLoading.component.html',
@@ -33,6 +37,7 @@ export class GameLoadingComponent implements OnInit {
         this.coreService.initialized.subscribe(() => {
             console.log('try to get session info')
 
+            // get session info to display
             this.coreService.sendData('get-session-info', sessionStorage.getItem("session-key"), (response: string) => {
                 console.log('get-session-info: ' + response);
 
@@ -42,14 +47,19 @@ export class GameLoadingComponent implements OnInit {
                 this.admin = json.admin;
             });
 
+            // listen for server requesting game start
             this.coreService.listen("start-game", () => this.router.navigate(["game"]));
 
+            // listen for new joined player, update players array
             this.coreService.listen('player-joined', (players: string) => {
                 this.joinedPlayers = JSON.parse(players);
             });
         });
     }
 
+    /**
+     * Notify server that player is offline.
+     */
     @HostListener('window:beforeunload', ['$event'])
     notifyPlayerOffline() {
         this.coreService.sendData('player-offline', sessionStorage.getItem("session-key"));

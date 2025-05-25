@@ -2,6 +2,10 @@ import {Component, Injectable, NgModule, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CoreService} from "../core.service";
 
+/**
+ * This class handles the game points counter.
+ */
+
 @Component({
     selector: 'points',
     imports: [
@@ -26,6 +30,7 @@ export class GamePointsModule implements OnInit {
     }
 
     public startListening() {
+        //listen for current points and update the counter
         this.coreService.listen("points", (points: string) => {
             this.coreService.points = parseInt(points)
         });
