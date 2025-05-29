@@ -34,7 +34,7 @@ export class TimerComponent implements OnInit {
                 clearInterval(this.intervalId);
 
                 // redirect to end screen
-                this.router.navigate(["end-leaderboard"])
+                location.href = "/end-leaderboard";
             });
         });
     }

@@ -18,6 +18,7 @@ interface Response {
 interface ISessionInfo {
     sessionKey: string,
     started: boolean,
+    ended: boolean,
     joinedPlayers: string[]
     admin: boolean
 }
@@ -79,6 +80,12 @@ export class CoreService {
                         // user isn't assigned to any session, redirect to session join
                         if (!json.sessionKey) {
                             this.router.navigate(["session-joining"]);
+                            return;
+                        }
+
+                        // game has ended, redirect to end leaderboard
+                        if(json.ended) {
+                            this.router.navigate(["end-leaderboard"]);
                             return;
                         }
 
