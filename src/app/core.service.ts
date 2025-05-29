@@ -70,7 +70,10 @@ export class CoreService {
                 sessionStorage.setItem('jwt', json.jwt);
 
                 // inform that client is online
-                this.sendData('player-online', sessionStorage.getItem("session-key"));
+                this.sendData('player-online', sessionStorage.getItem("session-key"), () => {
+                    // indicate to component classes that initialization is done
+                    this.initialized.next(true);
+                });
 
                 // filter request - redirect to according page if necessary
                 if (this.protectedPages.includes(location.pathname)) {
@@ -99,9 +102,6 @@ export class CoreService {
                         await this.router.navigate(["game-loading"]);
                     });
                 }
-
-                // indicate to component classes that initialization is done
-                this.initialized.next(true);
             });
         });
     }
