@@ -21,7 +21,8 @@ export class SessionCreationComponent implements OnInit {
     public duration: FormControl;
     public errorMessage: string;
 
-    constructor(private coreService: CoreService) {
+    constructor(private coreService: CoreService,
+                private router: Router) {
         this.duration = new FormControl();
     }
 
@@ -29,7 +30,10 @@ export class SessionCreationComponent implements OnInit {
         // when the session was successfully created, the user should automatically join to it
         this.coreService.listen('session-creation-successful', (sessionKey) => {
             sessionStorage.setItem("session-key", sessionKey);
+
+            //join to the created session
             this.coreService.sendData('join-session', sessionKey);
+            this.router.navigate(['session-joining']);
         });
     }
 

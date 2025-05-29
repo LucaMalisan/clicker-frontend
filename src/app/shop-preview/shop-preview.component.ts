@@ -72,6 +72,9 @@ export class ShopPreviewComponent implements OnInit {
             this.coreService.sendData(effect.route, sessionStorage.getItem("session-key"), (updatedEffects: string) => {
                 // update available effects
                 this.effects = JSON.parse(updatedEffects);
+
+                //keep enabled / disabled status
+                this.setEffectDisabled(effect.name, effect.disabled)
                 this.gamePoints.startListening();
             });
         }
