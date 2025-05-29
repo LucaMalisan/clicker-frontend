@@ -3,6 +3,10 @@ import {CoreService} from "../core.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 
+/**
+ * This class handles the creation of game sessions
+ */
+
 @Component({
     selector: 'session-creation',
     templateUrl: './sessionCreation.component.html',
@@ -13,6 +17,7 @@ import {Router, RouterLink} from "@angular/router";
 
 export class SessionCreationComponent implements OnInit {
 
+    //reference to duration input field
     public duration: FormControl;
     public errorMessage: string;
 
@@ -22,18 +27,18 @@ export class SessionCreationComponent implements OnInit {
     }
 
     ngOnInit() {
+        // when the session was successfully created, the user should automatically join to it
         this.coreService.listen('session-creation-successful', (sessionKey) => {
             sessionStorage.setItem("session-key", sessionKey);
-            this.coreService.sendData('join-session', sessionKey);
-        })
 
-        this.coreService.listen('join-successful', () => {
-                    location.href = 'game-loading';
-                }
-        );
+            //join to the created session
+            this.coreService.sendData('join-session', sessionKey);
+            this.router.navigate(['session-joining']);
+        });
     }
 
     public createSession() {
+        // inform server that new session should be created with given duration
         this.coreService.sendData('create-session', this.duration.value, (response: string) => {
             this.errorMessage = response
         });

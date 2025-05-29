@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
 
+/**
+ * This class handles the FPS counter functionality.
+ */
+
 @Component({
     selector: 'app-fps-counter',
     imports: [],
@@ -9,7 +13,7 @@ import {Component} from '@angular/core';
 export class FpsCounterComponent {
 
     protected times = [];
-    protected fps;
+    protected fps: number;
 
     constructor() {
         this.refreshLoop();
@@ -18,9 +22,9 @@ export class FpsCounterComponent {
     protected refreshLoop() {
         window.requestAnimationFrame(() => {
             const now = performance.now();
-            this.times = this.times.filter(e => e > (now - 1000));
-            this.times.push(now);
-            this.fps = this.times.length;
+            this.times = this.times.filter(e => e > (now - 1000)); // remove all entries older than 1s
+            this.times.push(now); //add new frame
+            this.fps = this.times.length; //all frames of the last second = current fps
             this.refreshLoop();
         });
     }
