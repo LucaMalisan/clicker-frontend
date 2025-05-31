@@ -4,9 +4,9 @@
 <app-chat></app-chat>
 <app-shop-preview></app-shop-preview>
 <section class="game">
-    <button (click)="addVirus($event)">
+    <div id="main-button" (click)="addVirus($event)">
         <img ngSrc="http://iconpublicschools.org/wp-content/uploads/2021/11/download-buttons-colors.png" width="100%" height="100%" alt=""/>
-    </button>
+    </div>
     <div class="floating-text-container">
         <span *ngFor="let virus of floatingTexts"
               class="floating-text"
