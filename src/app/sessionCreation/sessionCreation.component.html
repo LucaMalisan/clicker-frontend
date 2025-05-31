@@ -6,6 +6,12 @@
             <label> Select duration [min] </label>
             <input type="number" class="input-field" min="0" [formControl]="duration"/>
         </div>
+        <div class="tile-row">
+            <label> Select evaluation method </label>
+            <select class="input-field" [formControl]="evaluationMethod">
+                <option *ngFor="let method of availableEvaluationMethods" value="{{method.value}}"> {{ method.description }}</option>
+            </select>
+        </div>
         <button type="submit" (click)="createSession()"> Generate</button>
         <p class="error"> {{ errorMessage }}</p>
     </div>
