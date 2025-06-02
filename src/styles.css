@@ -33,7 +33,7 @@ p.error {
   font-size: 24px;
 }
 
-button {
+button, #main-button {
   font-size: 32px;
   padding: 20px 40px;
   border: none;
