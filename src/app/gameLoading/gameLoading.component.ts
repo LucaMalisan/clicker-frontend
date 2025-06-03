@@ -38,7 +38,7 @@ export class GameLoadingComponent implements OnInit {
             console.log('try to get session info')
 
             // get session info to display
-            this.coreService.sendData('get-session-info', sessionStorage.getItem("session-key"), (response: string) => {
+            this.coreService.sendData('get-session-info', localStorage.getItem("session-key"), (response: string) => {
                 console.log('get-session-info: ' + response);
 
                 let json: ISessionInfo = JSON.parse(response);
@@ -62,8 +62,8 @@ export class GameLoadingComponent implements OnInit {
      */
     @HostListener('window:beforeunload', ['$event'])
     notifyPlayerOffline() {
-        this.coreService.sendData('player-offline', sessionStorage.getItem("session-key"));
+        this.coreService.sendData('player-offline', localStorage.getItem("session-key"));
     }
 
-    protected readonly sessionStorage = sessionStorage;
+    protected readonly localStorage = localStorage;
 }

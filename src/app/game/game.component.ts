@@ -53,7 +53,7 @@ export class GameComponent implements OnInit {
 
                     let clicks: IButtonClick = {
                         buttonClicks: this.newButtonClicks,
-                        hexCode: sessionStorage.getItem("session-key")
+                        hexCode: localStorage.getItem("session-key")
                     };
 
                     this.coreService.sendData("handle-button-clicks", JSON.stringify(clicks));
@@ -91,6 +91,6 @@ export class GameComponent implements OnInit {
      */
     @HostListener('window:beforeunload', ['$event'])
     notifyPlayerOffline() {
-        this.coreService.sendData('player-offline', sessionStorage.getItem("session-key"));
+        this.coreService.sendData('player-offline', localStorage.getItem("session-key"));
     }
 }

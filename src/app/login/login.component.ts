@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
 
         this.coreService.listen('login-successful', (tokens: string) => {
             let json: Tokens = JSON.parse(tokens);
-            sessionStorage.setItem('jwt', json.jwt);
-            sessionStorage.setItem('refresh-token', json.refreshToken);
+            localStorage.setItem('jwt', json.jwt);
+            localStorage.setItem('refresh-token', json.refreshToken);
             location.href = "/session-joining";
         });
     }

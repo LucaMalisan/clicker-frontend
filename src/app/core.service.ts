@@ -47,8 +47,8 @@ export class CoreService {
 
         this.socket.on('connect', () => {
             console.log("connection attempt started")
-            let jwt = sessionStorage.getItem('jwt');
-            let refreshToken = sessionStorage.getItem('refresh-token');
+            let jwt = localStorage.getItem('jwt');
+            let refreshToken = localStorage.getItem('refresh-token');
             let tokens: Tokens = {
                 jwt: jwt,
                 refreshToken: refreshToken
@@ -66,18 +66,18 @@ export class CoreService {
                     return;
                 }
 
-                // jwt might have been refreshed, set it to sessionStorage
-                sessionStorage.setItem('jwt', json.jwt);
+                // jwt might have been refreshed, set it to localStorage
+                localStorage.setItem('jwt', json.jwt);
 
                 // inform that client is online
-                this.sendData('player-online', sessionStorage.getItem("session-key"), () => {
+                this.sendData('player-online', localStorage.getItem("session-key"), () => {
                     // indicate to component classes that initialization is done
                     this.initialized.next(true);
                 });
 
                 // filter request - redirect to according page if necessary
                 if (this.protectedPages.includes(location.pathname)) {
-                    this.sendData('get-session-info', sessionStorage.getItem("session-key"), async (response: string) => {
+                    this.sendData('get-session-info', localStorage.getItem("session-key"), async (response: string) => {
                         let json: ISessionInfo = JSON.parse(response);
 
                         // user isn't assigned to any session, redirect to session join

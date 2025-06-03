@@ -44,7 +44,7 @@ export class SessionCreationComponent implements OnInit {
     ngOnInit() {
         // when the session was successfully created, the user should automatically join to it
         this.coreService.listen('session-creation-successful', (sessionKey) => {
-            sessionStorage.setItem("session-key", sessionKey);
+            localStorage.setItem("session-key", sessionKey);
 
             //join to the created session
             this.coreService.sendData('join-session', sessionKey);
