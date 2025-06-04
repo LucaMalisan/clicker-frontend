@@ -32,7 +32,7 @@ export class SessionJoiningComponent implements OnInit {
         //join was successful, set session key to localstorage and redirect to game loading screen
         this.coreService.listen('join-successful', () => {
             if (this.sessionKey.value) {
-                sessionStorage.setItem("session-key", this.sessionKey.value);
+                localStorage.setItem("session-key", this.sessionKey.value);
             }
 
             location.href = 'game-loading';

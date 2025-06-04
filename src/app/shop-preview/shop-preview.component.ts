@@ -69,7 +69,7 @@ export class ShopPreviewComponent implements OnInit {
             this.coreService.points -= parseInt(effect.cost);
 
             // generic logic to inform server that effect should be activated
-            this.coreService.sendData(effect.route, sessionStorage.getItem("session-key"), (updatedEffects: string) => {
+            this.coreService.sendData(effect.route, localStorage.getItem("session-key"), (updatedEffects: string) => {
                 // update available effects
                 this.effects = JSON.parse(updatedEffects);
 
