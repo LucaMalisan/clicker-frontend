@@ -1,4 +1,4 @@
-<h1> Project Setup </h1>
+<h1> Lokales Setup </h1>
 Der Client kann als Docker-Container laufen gelassen werden.
 Folgende Schritte sind dazu nötig:
 <ol>
@@ -7,3 +7,6 @@ Folgende Schritte sind dazu nötig:
   <li> Server und Datenbank starten
   <li> Der Client läuft unter <a href="http://localhost:4002">localhost:4002</a>   </li>
 </ol>
+
+<h1> Public Demo </h1>
+<a href="https://clicker-frontend-374055608046.europe-west9.run.app/"> Link </a>
