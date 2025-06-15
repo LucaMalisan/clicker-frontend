@@ -46,15 +46,13 @@ export class GameComponent implements OnInit {
 
             //send collected button clicks each 250 ms and clear cache
             let intervalId = setInterval(() => {
-                if (this.newButtonClicks > 0) {
-                    let clicks: IButtonClick = {
-                        buttonClicks: this.newButtonClicks,
-                        hexCode: localStorage.getItem("session-key")
-                    };
+                let clicks: IButtonClick = {
+                    buttonClicks: this.newButtonClicks,
+                    hexCode: localStorage.getItem("session-key")
+                };
 
-                    this.coreService.sendData("handle-button-clicks", JSON.stringify(clicks));
-                    this.newButtonClicks = 0;
-                }
+                this.coreService.sendData("handle-button-clicks", JSON.stringify(clicks));
+                this.newButtonClicks = 0;
             }, 250);
 
             this.coreService.intervals.push(intervalId);
