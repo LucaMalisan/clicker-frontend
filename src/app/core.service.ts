@@ -37,6 +37,7 @@ export class CoreService {
     public initialized: Subject<Boolean> = new ReplaySubject();
     public points: number = 0;
     public protectedPages = ["/game", "/game-loading", "/end-leaderboard"];
+    public intervals = [];
 
     constructor(private router: Router) {
 

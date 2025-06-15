@@ -20,7 +20,7 @@ const routes: Routes = [
     {path: 'game-loading', component: GameLoadingComponent},
     {path: 'game', component: GameComponent},
     {path: 'end-leaderboard', component: EndLeaderboardComponent},
-    {path: '*', redirectTo: 'session-joining', pathMatch: 'full'}
+    {path: '', redirectTo: 'session-joining', pathMatch: 'full'}
 ];
 
 @NgModule({

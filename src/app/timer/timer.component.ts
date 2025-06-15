@@ -27,16 +27,7 @@ export class TimerComponent implements OnInit {
             // sync timer with server - e.g. used on page refresh
             this.coreService.sendData("get-remaining-duration", localStorage.getItem("session-key"),
                     (duration: string) => this.startTimer(parseInt(duration)));
-
-            //server informs that session should be stopped
-            this.coreService.listen("stop-session", () => {
-                console.log("stop-session");
-                clearInterval(this.intervalId);
-
-                // redirect to end screen
-
-                this.router.navigate(["end-leaderboard"]);
-            });
+            this.coreService.intervals.push(this.intervalId);
         });
     }
 

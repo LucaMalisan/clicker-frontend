@@ -38,9 +38,6 @@ export class GameComponent implements OnInit {
     // array for the "+virus" animation
     public floatingTexts: FloatingText[] = [];
 
-    // how many virus are gained per button click
-    public virusAmountGained: number = 1;
-
     constructor(private coreService: CoreService) {
     }
 
@@ -48,18 +45,27 @@ export class GameComponent implements OnInit {
         this.coreService.initialized.subscribe(() => {
 
             //send collected button clicks each 250 ms and clear cache
-            setInterval(() => {
-                if (this.newButtonClicks > 0) {
+            let intervalId = setInterval(() => {
+                let clicks: IButtonClick = {
+                    buttonClicks: this.newButtonClicks,
+                    hexCode: localStorage.getItem("session-key")
+                };
 
-                    let clicks: IButtonClick = {
-                        buttonClicks: this.newButtonClicks,
-                        hexCode: localStorage.getItem("session-key")
-                    };
-
-                    this.coreService.sendData("handle-button-clicks", JSON.stringify(clicks));
-                    this.newButtonClicks = 0;
-                }
+                this.coreService.sendData("handle-button-clicks", JSON.stringify(clicks));
+                this.newButtonClicks = 0;
             }, 250);
+
+            this.coreService.intervals.push(intervalId);
+
+            //server informs that session should be stopped
+            this.coreService.listen("stop-session", () => {
+                console.log("stop sessions and intervals");
+                this.coreService.intervals.forEach(e => clearTimeout(e));
+                this.coreService.intervals = [];
+
+                // redirect to end screen
+                location.href = "end-leaderboard";
+            });
         });
     }
 

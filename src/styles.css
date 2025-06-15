@@ -170,7 +170,7 @@ app-leaderboard {
 
 app-effect-log {
   grid-column: 3;
-  grid-row: 4;
+  grid-row: 3 / 5;
 }
 
 div.entry {
@@ -182,6 +182,12 @@ div.entry {
   padding: 15px;
   align-items: center;
   background-color: var(--contrast-secondary);
+  height: 30px
+}
+
+.scroll {
+  overflow-y: auto;
+  height: 128px;
 }
 
 div.tile {
