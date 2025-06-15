@@ -10,4 +10,4 @@ RUN npm install
 # Kopiere den Rest der Anwendung
 COPY . .
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--configuration=production"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--configuration=production", "--disable-host-check"]
